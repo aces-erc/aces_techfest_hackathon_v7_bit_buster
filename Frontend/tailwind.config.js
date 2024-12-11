@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+import animate from "tailwindcss-animate"
 export default {
     darkMode: ["class"],
     content: [
@@ -15,9 +16,9 @@ export default {
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
-        primary: "#880808",
-        secondary: "#EEFFDB",
-        tert: '#36382E',
+			primary: "#880808",
+			secondary: "#EEFFDB",
+			tert: '#36382E',
   			card: {
   				DEFAULT: 'hsl(var(--card))',
   				foreground: 'hsl(var(--card-foreground))'
@@ -59,5 +60,5 @@ export default {
   		}
   	}
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [animate],
 }

@@ -7,7 +7,7 @@ import Navbar from '../components/landing/navbar'
 const Landing = () => {
   return (
     <>
-      <Navbar />
+      <Navbar/>
       <Hero />
       <Why />
       <Features />
