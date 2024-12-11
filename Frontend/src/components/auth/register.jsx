@@ -1,12 +1,21 @@
-import { useState } from 'react';
+import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
-
-const  RegistrationForm = () =>{
+const RegistrationForm = () => {
+  const avatarRef = useRef();
+  const citizenshipRef = useRef();
+  const [avatar, setAvatar] = useState(null);
+  const [citizenship, setCitizenship] = useState(null);
   return (
     <form className="space-y-4">
       <div className="space-y-2">
@@ -52,6 +61,62 @@ const  RegistrationForm = () =>{
         <Label htmlFor="citizenship">Citizenship Number</Label>
         <Input id="citizenship" name="citizenship" required />
       </div>
+
+      <div className="gspace-y-2">
+        <Label htmlFor="picture">Avatar</Label>
+        <Input
+          onChange={(e) => setAvatar(e.target.files[0])}
+          id="picture"
+          type="file"
+          placeholder="photo must include both sides"
+          className="hidden"
+          ref={avatarRef}
+        />
+        <div className="flex w-full justify-center items-center min-h-8 ">
+          <span
+            className="h-full mx-8 grid border-dotted border-2 border-indigo-600 items-center cursor-pointer"
+            onClick={() => avatarRef.current.click()}
+          >
+            {avatar ? (
+              <img
+                src={URL.createObjectURL(avatar)}
+                alt="citizenship"
+                className="h-24 w-24 object-cover"
+              />
+            ) : (
+              "Upload your photo"
+            )}
+          </span>
+        </div>
+      </div>
+      <div className="gspace-y-2">
+        <Label htmlFor="picture">Citizenship photo</Label>
+        <Input
+          onChange={(e) => setCitizenship(e.target.files[0])}
+          id="picture"
+          type="file"
+          placeholder="photo must include both sides"
+          className="hidden"
+          ref={citizenshipRef}
+        />
+        <div className="flex w-full justify-center items-center min-h-8 ">
+          <span
+            className="h-full mx-8 grid border-dotted border-2 border-indigo-600 items-center cursor-pointer"
+            onClick={() => citizenshipRef.current.click()}
+          >
+            {avatar ? (
+              <img
+                src={URL.createObjectURL(citizenship)}
+                alt="citizenship"
+                className="h-24 w-24 object-cover"
+              />
+            ) : (
+              "Upload citizenship photo"
+            )}
+          </span>
+        </div>
+      </div>
+
       <div className="space-y-2">
         <Label>Gender</Label>
         <RadioGroup name="gender" className="flex space-x-4">
@@ -63,6 +128,7 @@ const  RegistrationForm = () =>{
             <RadioGroupItem value="female" id="female" />
             <Label htmlFor="female">Female</Label>
           </div>
+
           <div className="flex items-center space-x-2">
             <RadioGroupItem value="other" id="other" />
             <Label htmlFor="other">Other</Label>
@@ -78,6 +144,6 @@ const  RegistrationForm = () =>{
       </Button>
     </form>
   );
-}
+};
 
 export default RegistrationForm;

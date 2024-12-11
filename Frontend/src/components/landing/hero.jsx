@@ -1,8 +1,7 @@
-import { Button } from "@/components/ui/button"
-import DialogDemo from "../auth/triggerBtn"
+import { Button } from "@/components/ui/button";
+import DialogDemo from "../auth/triggerBtn";
 
-
-const  HeroSection=()=> {
+const HeroSection = () => {
   return (
     <div className="relative my-4 overflow-hidden">
       <div className="absolute inset-0">
@@ -20,12 +19,19 @@ const  HeroSection=()=> {
             <span className="block text-primary-">Donate Blood Today</span>
           </h1>
           <p className="mt-6 text-xl md:text-2xl text-secondary/70 max-w-3xl">
-            Your donation can save up to three lives. Join our community of heroes and make a difference in someone's life today. Every drop counts!
+            Your donation can save up to three lives. Join our community of
+            heroes and make a difference in someone's life today. Every drop
+            counts!
           </p>
           <div className="mt-10 flex flex-col sm:flex-row gap-4">
-           
-            <DialogDemo login={true}/>
-            <DialogDemo login={false}></DialogDemo>
+            <DialogDemo
+              login={true}
+              styles="py-3 border border-transparent text-base font-medium rounded-md text-white bg-red-600 hover:bg-red-700 md:py-4 md:text-lg md:px-8 "
+            />
+            <DialogDemo
+              login={false}
+              styles="py-3 shadow-sm text-primary font-medium rounded-md border-[1px]  hover:bg-gray-200 md:py-4 md:text-lg md:px-8 "
+            ></DialogDemo>
           </div>
         </div>
       </div>
@@ -49,12 +55,15 @@ const  HeroSection=()=> {
               <rect x="0" y="0" width="4" height="4" fill="currentColor" />
             </pattern>
           </defs>
-          <rect width="364" height="384" fill="url(#eab71dd9-9d7a-47bd-8044-256344ee00d0)" />
+          <rect
+            width="364"
+            height="384"
+            fill="url(#eab71dd9-9d7a-47bd-8044-256344ee00d0)"
+          />
         </svg>
       </div>
     </div>
-  )
-}
-
+  );
+};
 
 export default HeroSection;
