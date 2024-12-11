@@ -137,3 +137,26 @@ export const logout = (req, res) => {
         return res.status(500).json({ success: false, message: "Internal Server Error" });
     }
 }
+
+export const checkAuth = async (req, res) => {
+    try {
+        const token = req.cookies.token;
+
+        if (!token)
+            return res.status(200).json({ success: true, result: { isAuthenticated: false } });
+
+        const payLoad = jwt.verify(token, process.env.JWT_SECRET);
+
+        if (!payLoad)
+            return res.status(200).json({ success: true, result: { isAuthenticated: false } });
+
+        req.userId = payLoad.userId;
+
+        const user = await userModel.findById(payLoad.userId);
+        return res.status(200).json({ success: true, result: { isAuthenticated: true, user: { ...user, password: undefined } } });
+
+    } catch (error) {
+        console.log("Error in checkAuth \n", error);
+        return res.status(500).json({ success: false, message: "Internal Server Error" });
+    }
+}
