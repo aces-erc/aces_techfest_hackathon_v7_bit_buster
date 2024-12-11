@@ -1,6 +1,8 @@
 import { useState } from 'react'
+import {Route, Routes} from 'react-router-dom'
 import './App.css'
 import Landing from './pages/landing'
+import Home from './pages/home'
 
 
 function App() {
@@ -8,7 +10,11 @@ function App() {
 
   return (
     <div style={{ fontFamily: "Poppins, sans-serif"}}>
-      <Landing />
+      <Routes>
+            <Route path="/" element={<Landing />} />
+            <Route path="/home" element={<Home />} />
+         </Routes>
+
     </div>
   )
 }
