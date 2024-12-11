@@ -20,7 +20,7 @@ const Why = () => {
             </h1>
         </div>
         <hr></hr>
-        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 my-2'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 my-2 gap-4'>
                 {reasons.map((reason) => {
                     return(
                             <Box title={reason.title} description={reason.description} />
