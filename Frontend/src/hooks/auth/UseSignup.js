@@ -18,16 +18,19 @@ const UseSignup = () => {
         lastDonationDate,
         password,
         confirmPassword,
-        gender
+        gender,
+        avatar,
+        citizenship
     }) => {
-        if (!firstName || !email || !password || !confirmPassword || !lastName || !contact || !citizenShipNumber || !role || !bloodGroup || !age || !lastDonationDate || !gender)
-            return toast.error("Please fill in all the fields")
+        if (!email || !password || !confirmPassword || !contact || !citizenShipNumber || !role || !bloodGroup || !gender)
+            return console.log("please fill all the fields");
+
 
         setIsLoading(true);
         try {
             const formData = new FormData();
-            formData.append("firstName", firstName);
-            formData.append("lastName", lastName);
+            formData.append("firstName", "prabin");
+            formData.append("lastName", "Acharya");
             formData.append("email", email);
             formData.append("password", password);
             formData.append("confirmPassword", confirmPassword);
@@ -35,30 +38,35 @@ const UseSignup = () => {
             formData.append("citizenShipNumber", citizenShipNumber);
             formData.append("role", role);
             formData.append("bloodGroup", bloodGroup);
-            formData.append("age", age);
-            formData.append("lastDonationDate", lastDonationDate);
+            formData.append("age", 23);
+            formData.append("lastDonationDate", Date.now());
             formData.append("gender", gender);
 
-            if (profileImageFile) {
-                formData.append("profileImageFile", profileImageFile);
+            if (avatar) {
+                formData.append("profileImageFile", avatar);
             }
-            if (citizenshipImageFile) {
-                formData.append("citizenshipImageFile", citizenshipImageFile);
+            if (citizenship) {
+                formData.append("citizenshipImageFile", citizenship);
             }
 
             const response = await axiosInstance.post("/auth/signup", formData);
 
             if (!response.data.success) {
-                toast.error(response.data.message)
+                // toast.error(response.data.message)
+                console.log(response.data.message);
+
                 return false;
             }
 
             // setCurrentUser(response.data.result.user);
 
             // toast.success("signup successful");
+            console.log("signup successful");
+
             return true;
         } catch (error) {
-            toast.error(error.response.data.message);
+            // toast.error(error.response.data.message);
+            console.log(error);
             return false;
         } finally {
             setIsLoading(false);
