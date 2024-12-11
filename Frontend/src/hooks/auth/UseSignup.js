@@ -25,6 +25,9 @@ const UseSignup = () => {
         if (!email || !password || !confirmPassword || !contact || !citizenShipNumber || !role || !bloodGroup || !gender)
             return console.log("please fill all the fields");
 
+        // console.log(firstName, lastName, email, contact, citizenShipNumber, role, bloodGroup, age, lastDonationDate, password, confirmPassword, gender, avatar, citizenship);
+
+
 
         setIsLoading(true);
         try {
@@ -48,6 +51,9 @@ const UseSignup = () => {
             if (citizenship) {
                 formData.append("citizenshipImageFile", citizenship);
             }
+
+            console.log(formData);
+
 
             const response = await axiosInstance.post("/auth/signup", formData);
 

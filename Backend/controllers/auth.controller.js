@@ -23,6 +23,9 @@ export const signup = async (req, res) => {
             gender
         } = req.body;
 
+        console.log(req.body);
+        
+
         const profileImageFile = req.files?.profileImageFile;
         const citizenshipImageFile = req.files?.citizenshipImageFile;
 
