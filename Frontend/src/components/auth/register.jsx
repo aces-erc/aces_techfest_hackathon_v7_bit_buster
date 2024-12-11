@@ -39,15 +39,27 @@ const RegistrationForm = () => {
   const handleSignup = async (e) => {
     e.preventDefault();
 
-    const { fullName, email, password, confirmPassword } = userData;
-    const success = await signup({ fullName, email, password, confirmPassword, setCurrentUser, imageFile: image });
-
-    if (success)
-      setSignupPromptVisible(false);
+    const { firstName, lastName, email, contact, citizenShipNumber, role, bloodGroup, age, lastDonationDate, password, confirmPassword, gender } = userData;
+    const success = await signup({
+      firstName,
+      lastName,
+      email,
+      contact,
+      citizenShipNumber,
+      role,
+      bloodGroup,
+      age,
+      lastDonationDate,
+      password,
+      confirmPassword,
+      gender,
+      avatar,
+      citizenship
+    });
   }
 
   return (
-    <form className="space-y-4">
+    <form className="space-y-4" onSubmit={handleSignup}>
       <div className="space-y-2">
         <Label htmlFor="username">Email {userData.email}</Label>
         <Input onChange={(e) => setUserData({ ...userData, [e.target.name]: e.target.value })} value={userData.email} type="email" name="email" required />
@@ -67,11 +79,11 @@ const RegistrationForm = () => {
       </div>
       <div className="space-y-2">
         <Label htmlFor="contact">Contact Number</Label>
-        <Input id="contact" name="contact" type="tel" required />
+        <Input onChange={(e) => setUserData({ ...userData, contact: e.target.value })} value={userData.contact} name="contact" type="tel" required />
       </div>
       <div className="space-y-2">
         <Label htmlFor="blood-group">Blood Group</Label>
-        <Select name="blood-group" required>
+        <Select onValueChange={(e) => setUserData({ ...userData, bloodGroup: e })} name="blood-group" required>
           <SelectTrigger>
             <SelectValue placeholder="Select blood group" />
           </SelectTrigger>
@@ -89,7 +101,7 @@ const RegistrationForm = () => {
       </div>
       <div className="space-y-2">
         <Label htmlFor="citizenship">Citizenship Number</Label>
-        <Input id="citizenship" name="citizenship" required />
+        <Input onChange={(e) => setUserData({ ...userData, citizenShipNumber: e.target.value })} value={userData.citizenShipNumber} id="citizenship" name="citizenship" required />
       </div>
 
       <div className="gspace-y-2">
@@ -149,7 +161,7 @@ const RegistrationForm = () => {
 
       <div className="space-y-2">
         <Label>Gender</Label>
-        <RadioGroup name="gender" className="flex space-x-4">
+        <RadioGroup onChange={(e) => setUserData({ ...userData, gender: e.target.value })} name="gender" className="flex space-x-4">
           <div className="flex items-center space-x-2">
             <RadioGroupItem value="male" id="male" />
             <Label htmlFor="male">Male</Label>
@@ -167,7 +179,11 @@ const RegistrationForm = () => {
       </div>
       <div className="space-y-2">
         <Label htmlFor="password">Password</Label>
-        <Input id="password" name="password" type="password" required />
+        <Input onChange={(e) => setUserData({ ...userData, password: e.target.value })} value={userData.password} id="password" name="password" type="password" required />
+      </div>
+      <div className="space-y-2">
+        <Label htmlFor="confirmPassword">Confirm Password</Label>
+        <Input onChange={(e) => setUserData({ ...userData, confirmPassword: e.target.value })} value={userData.confirmPassword} type="password" required />
       </div>
       <Button type="submit" className="w-full">
         Create Account
