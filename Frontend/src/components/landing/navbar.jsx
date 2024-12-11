@@ -5,7 +5,7 @@ const Navbar = () => {
   return (
     <div className='flex flex-row w-full justify-between'>
         <div>
-            <h1 className='font-bold text-3xl text-tert'>
+            <h1 className='font-bold text-4xl text-tert'>
                 RedBond
             </h1>
         </div>
