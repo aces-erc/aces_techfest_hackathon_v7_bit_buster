@@ -28,9 +28,6 @@ const Why = () => {
                         )
                 })}
         </div>
-        <div>
-            <DialogDemo login={false}/>
-        </div>
     </div>
   )
 }
