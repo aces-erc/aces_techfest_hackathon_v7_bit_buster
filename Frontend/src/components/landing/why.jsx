@@ -1,5 +1,6 @@
 import React from 'react'
 import Box from './box'
+import DialogDemo from '../auth/triggerBtn';
 
 const reasons = [
     {title: "Save Lives", description: "You can save up to 3 lives with a single donation."},
@@ -27,7 +28,9 @@ const Why = () => {
                         )
                 })}
         </div>
-        <div></div>
+        <div>
+            <DialogDemo login={false}/>
+        </div>
     </div>
   )
 }
