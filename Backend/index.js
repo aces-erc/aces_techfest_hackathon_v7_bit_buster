@@ -1,4 +1,5 @@
 import cookieParser from "cookie-parser";
+import multer from "multer"
 import cors from "cors";
 import "dotenv/config";
 import express from "express";
@@ -16,6 +17,7 @@ app.use(cors({
   origin: "http://localhost:5173",
   credentials: true
 }));
+
 
 //route middlewares
 app.use("/api/auth", authRouter);

@@ -19,43 +19,51 @@ const UseSignup = () => {
         password,
         confirmPassword,
         gender,
-        avatar,
-        citizenship
+        // avatar,
+        // citizenship
     }) => {
         if (!email || !password || !confirmPassword || !contact || !citizenShipNumber || !role || !bloodGroup || !gender)
             return console.log("please fill all the fields");
 
         // console.log(firstName, lastName, email, contact, citizenShipNumber, role, bloodGroup, age, lastDonationDate, password, confirmPassword, gender, avatar, citizenship);
 
-
+        // console.log(avatar, citizenship)
 
         setIsLoading(true);
         try {
-            const formData = new FormData();
-            formData.append("firstName", "prabin");
-            formData.append("lastName", "Acharya");
-            formData.append("email", email);
-            formData.append("password", password);
-            formData.append("confirmPassword", confirmPassword);
-            formData.append("contact", contact);
-            formData.append("citizenShipNumber", citizenShipNumber);
-            formData.append("role", role);
-            formData.append("bloodGroup", bloodGroup);
-            formData.append("age", 23);
-            formData.append("lastDonationDate", Date.now());
-            formData.append("gender", gender);
+            // const formData = new FormData();
+            // formData.append("firstName", "prabin");
+            // formData.append("lastName", "Acharya");
+            // formData.append("email", email);
+            // formData.append("password", password);
+            // formData.append("confirmPassword", confirmPassword);
+            // formData.append("contact", contact);
+            // formData.append("citizenShipNumber", citizenShipNumber);
+            // formData.append("role", role);
+            // formData.append("bloodGroup", bloodGroup);
+            // formData.append("age", 23);
+            // formData.append("lastDonationDate", Date.now());
+            // formData.append("gender", gender);
 
-            if (avatar) {
-                formData.append("profileImageFile", avatar);
-            }
-            if (citizenship) {
-                formData.append("citizenshipImageFile", citizenship);
-            }
+            // if (avatar) {
+            //     formData.append("profileImageFile", avatar);
+            // }
+            // if (citizenship) {
+            //     formData.append("citizenshipImageFile", citizenship);
+            // }
 
-            console.log(formData);
+            // console.log(formData);
 
 
-            const response = await axiosInstance.post("/auth/signup", formData);
+            const response = await axiosInstance.post("/auth/signup", {firstName, lastName, email, password, confirmPassword, contact, citizenShipNumber, role,
+                bloodGroup, age, lastDonationDate, gender
+            });
+            // const res = await fetch("http://localhost:3000/api/auth/signup", {
+            //     method: "POST",
+            //     body: formData
+            // })
+
+            // const data = await res.json();
 
             if (!response.data.success) {
                 // toast.error(response.data.message)

@@ -13,11 +13,11 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import UseSignup from "../../hooks/auth/UseSignup";
 
 const RegistrationForm = () => {
-  const avatarRef = useRef();
-  const citizenshipRef = useRef();
+  // const avatarRef = useRef();
+  // const citizenshipRef = useRef();
 
-  const [avatar, setAvatar] = useState(null);
-  const [citizenship, setCitizenship] = useState(null);
+  // const [avatar, setAvatar] = useState(null);
+  // const [citizenship, setCitizenship] = useState(null);
 
   const [userData, setUserData] = useState({
     firstName: "",
@@ -53,16 +53,28 @@ const RegistrationForm = () => {
       password,
       confirmPassword,
       gender,
-      avatar,
-      citizenship
+      // avatar,
+      // citizenship
     });
   }
 
   return (
     <form className="space-y-4" onSubmit={handleSignup}>
       <div className="space-y-2">
-        <Label htmlFor="username">Email {userData.email}</Label>
-        <Input onChange={(e) => setUserData({ ...userData, [e.target.name]: e.target.value })} value={userData.email} type="email" name="email" required />
+        <Label htmlFor="firstName">First Name</Label>
+        <Input onChange={(e) => setUserData({ ...userData, firstName: e.target.value })} value={userData.firstName} type="text" name="firstName" required />
+      </div>
+      <div className="space-y-2">
+        <Label htmlFor="lastName">Last Name</Label>
+        <Input onChange={(e) => setUserData({ ...userData, lastName: e.target.value })} value={userData.lastName} type="text" name="lastName" required />
+      </div>
+      <div className="space-y-2">
+        <Label htmlFor="username">Email</Label>
+        <Input onChange={(e) => setUserData({ ...userData, email: e.target.value })} value={userData.email} type="email" name="email" required />
+      </div>
+      <div className="space-y-2">
+        <Label htmlFor="username">Age</Label>
+        <Input onChange={(e) => setUserData({ ...userData, age: e.target.value })} value={userData.age} type="number" name="age" required />
       </div>
       <div className="space-y-2">
         <Label htmlFor="role">Role</Label>
@@ -104,7 +116,7 @@ const RegistrationForm = () => {
         <Input onChange={(e) => setUserData({ ...userData, citizenShipNumber: e.target.value })} value={userData.citizenShipNumber} id="citizenship" name="citizenship" required />
       </div>
 
-      <div className="gspace-y-2">
+      {/*<div className="gspace-y-2">
         <Label htmlFor="picture">Avatar</Label>
         <Input
           onChange={(e) => setAvatar(e.target.files[0])}
@@ -157,7 +169,7 @@ const RegistrationForm = () => {
             )}
           </span>
         </div>
-      </div>
+      </div>*/}
 
       <div className="space-y-2">
         <Label>Gender</Label>

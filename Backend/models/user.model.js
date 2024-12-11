@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
     bloodGroup: { type: String, required: true, enum: ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-", "Rh-null"] },
     age: { type: Number, required: true },
     gender: { type: String, required: true, enum: ["male", "female", "others"] },
-    locationId: { type: mongoose.Schema.Types.ObjectId, ref: "locationModel", required: true },
+    // locationId: { type: mongoose.Schema.Types.ObjectId, ref: "locationModel", required: true },
     contact: { type: Number, required: true, match: [/^\d{10}$/, 'Please enter a valid 10-digit phone number'], },
     citizenShipNumber: { type: String, required: true },
 
@@ -16,8 +16,8 @@ const userSchema = new mongoose.Schema({
     lastDonationDate: { type: Date , required: true, default: null },
     verificationStatus: { type: Boolean, default: false },
     isActive: { type: Boolean, default: false },
-    profilePicture: { type: String, required: true },
-    citizenshipPhoto: { type: String, required: true },
+    // profilePicture: { type: String, required: true },
+    // citizenshipPhoto: { type: String, required: true },
 
     donationHistory: [{ type: mongoose.Schema.Types.ObjectId, ref: "donationModel" }]
 });

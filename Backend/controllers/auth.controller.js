@@ -23,11 +23,11 @@ export const signup = async (req, res) => {
             gender
         } = req.body;
 
-        console.log(req.body);
-        
+        // console.log(req);
 
-        const profileImageFile = req.files?.profileImageFile;
-        const citizenshipImageFile = req.files?.citizenshipImageFile;
+
+        // const profileImageFile = req.files?.profileImageFile;
+        // const citizenshipImageFile = req.files?.citizenshipImageFile;
 
         //check if confirm password match with password
         if (password !== confirmPassword)
@@ -60,22 +60,22 @@ export const signup = async (req, res) => {
             contact,
             role,
             lastDonationDate,
-            profilePicture
+            // profilePicture
         }
 
         //upload file to cloudonary and get its url
-        if (profileImageFile) {
-            const profileImageUrl = await uploadToCloudinary(profileImageFile);
-            updateFields.profilePicture = profileImageUrl;
-        }
+        // if (profileImageFile) {
+        //     const profileImageUrl = await uploadToCloudinary(profileImageFile);
+        //     updateFields.profilePicture = profileImageUrl;
+        // }
 
-        if (citizenshipImageFile) {
-            const citizenshipImageUrl = await uploadToCloudinary(citizenshipImageFile);
-            updateFields.citizenshipPhoto = citizenshipImageUrl;
-        }
+        // if (citizenshipImageFile) {
+        //     const citizenshipImageUrl = await uploadToCloudinary(citizenshipImageFile);
+        //     updateFields.citizenshipPhoto = citizenshipImageUrl;
+        // }
 
         //create a new user from usermodel using above info
-        const newUser = new userModel({ updateFields })
+        const newUser = new userModel(updateFields)
 
         if (newUser) {
             await newUser.save();
