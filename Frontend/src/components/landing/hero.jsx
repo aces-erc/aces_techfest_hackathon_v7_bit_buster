@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button"
-import DialogDemo from "../auth/SignInUpBtn"
+import DialogDemo from "../auth/triggerBtn"
 
 
 const  HeroSection=()=> {
@@ -24,12 +24,12 @@ const  HeroSection=()=> {
           </p>
           <div className="mt-10 flex flex-col sm:flex-row gap-4">
            
-            {/* <DialogDemo buttonText={"signup"}/> */}
-            <DialogDemo buttonText={"signup"}/>
+            <DialogDemo login={true}/>
+            <DialogDemo login={false}></DialogDemo>
           </div>
         </div>
       </div>
-      <div className="absolute bottom-0 right-0 w-full md:w-1/2 lg:w-2/3 h-1/3 md:h-2/3">
+      <div className="absolute bottom-0 right-0 w-full md:w-1/2 lg:w-2/3 h-1/3 md:h-2/3 -z-10">
         <svg
           className="absolute bottom-0 right-0 transform translate-x-1/2 mb-48 text-red-400 lg:top-0 lg:mt-28 lg:mb-0 xl:transform-none xl:translate-x-0"
           width="364"
