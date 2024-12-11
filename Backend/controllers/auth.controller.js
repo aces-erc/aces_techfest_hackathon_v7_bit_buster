@@ -104,6 +104,8 @@ export const login = async (req, res) => {
         //fetch username and password from frontend
         const { email, password } = req.body;
 
+        console.log(email, password)
+
         //find the user and check if credentials are correct
         const user = await userModel.findOne({ email });
         const isPasswordCorrect = await bcrypt.compare(password, user?.password || "");
