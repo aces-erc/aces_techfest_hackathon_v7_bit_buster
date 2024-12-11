@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
 import Landing from './pages/landing'
@@ -8,7 +8,12 @@ import { Toaster } from "@/components/ui/toaster"
 
 function App() {
   const [count, setCount] = useState(0)
-      const {authUser, checkAuth} = UseAuthStore()
+  const { checkAuth, authUser } = UseAuthStore()
+
+  useEffect(() => {
+    checkAuth();
+  }, [authUser])
+
   return (
     <div style={{ fontFamily: "Poppins, sans-serif" }}>
       <Routes>
