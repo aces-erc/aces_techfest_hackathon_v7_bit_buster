@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button"
-import DialogDemo from "../auth/loginForm";
+import DialogDemo from "../auth/SignInUpBtn"
 
 
 const  HeroSection=()=> {
@@ -23,10 +23,9 @@ const  HeroSection=()=> {
             Your donation can save up to three lives. Join our community of heroes and make a difference in someone's life today. Every drop counts!
           </p>
           <div className="mt-10 flex flex-col sm:flex-row gap-4">
-            <DialogDemo/>
-            <Button variant="outline" className="w-full sm:w-auto flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-red-100 bg-opacity-20 hover:bg-opacity-30 md:py-4 md:text-lg md:px-10">
-              Sign Up
-            </Button>
+           
+            {/* <DialogDemo buttonText={"signup"}/> */}
+            <DialogDemo buttonText={"signup"}/>
           </div>
         </div>
       </div>
