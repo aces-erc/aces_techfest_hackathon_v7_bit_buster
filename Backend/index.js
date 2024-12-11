@@ -3,12 +3,14 @@ import cors from "cors";
 import "dotenv/config";
 import express from "express";
 import connectToDatabase from "./database/connection.js";
+import authRouter from "./routes/auth.route.js";
 
 const app = express();
 const PORT = process.env.PORT;
 
 //middlewares
-app.use(express.json());
+// app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(cors({
   origin: "https://localhost:5173",
@@ -16,7 +18,7 @@ app.use(cors({
 }));
 
 //route middlewares
-
+app.use("/api/auth", authRouter);
 
 
 

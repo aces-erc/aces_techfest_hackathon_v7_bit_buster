@@ -24,7 +24,7 @@ const bloodDonationCenterSchema = new Schema({
         required: true,
         match: [/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/, 'Please enter a valid email address'],  // Email validation
     },
-    availableBloodTypes: {
+    availableBloodGroups: {
         type: [String],  // Array of blood types available at the center
         enum: ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'],  // Blood type options
         required: true,
