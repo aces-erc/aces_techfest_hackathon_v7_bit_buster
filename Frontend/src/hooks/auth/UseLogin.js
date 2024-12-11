@@ -1,5 +1,4 @@
 import { axiosInstance } from '@/lib/axios'
-import { User } from '@/types';
 import { useState } from 'react';
 import { toast } from 'react-toastify'
 
