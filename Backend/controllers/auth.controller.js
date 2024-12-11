@@ -3,25 +3,9 @@ import uploadToCloudinary from '../lib/cloudinary/uploadToCloudinary.js';
 import generateTokenAndSetCookie from '../lib/jwt/generateToken.js';
 import userModel from '../models/user.model.js';
 
-// import { createAvatar } from '@dicebear/core';
-// import { micah } from '@dicebear/collection';
 
 // signup logic
 export const signup = async (req, res) => {
-    console.log("signup");
-    //     try {
-
-    //         const { firstName } = req.body;
-    //         console.log(firstName);
-
-    //         res.json({ message: "firstName" })
-
-    //     } catch (error) {
-    //         console.log(error);
-    //         res.json({ message: "Error" })
-    //     }
-    // }
-
     try {
         // Extract required parameters from body sent from frontend
         const {
@@ -38,10 +22,6 @@ export const signup = async (req, res) => {
             confirmPassword,
             gender
         } = req.body;
-
-        console.log(firstName);
-        res.json({ message: "done" })
-
 
         const profileImageFile = req.files?.profileImageFile;
         const citizenshipImageFile = req.files?.citizenshipImageFile;
@@ -64,6 +44,7 @@ export const signup = async (req, res) => {
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
 
+        //fields to be used while creating user
         let updateFields = {
             firstName,
             lastName,
@@ -102,11 +83,8 @@ export const signup = async (req, res) => {
             //send the response with success message and created user info
             return res.status(200).json({
                 success: true, user: {
-                    _id: newUser._id,
-                    fullName: `${newUser.firstName} ${newUser.lastName}`,
-                    email: newUser.email,
-                    gender: newUser.gender,
-                    profilePicture: newUser.profilePicture
+                    ...newUser,
+                    password: undefined
                 }
             })
         } else {
@@ -121,45 +99,41 @@ export const signup = async (req, res) => {
 
 }
 
-// export const login = async (req, res) => {
-//     try {
-//         //fetch username and password from frontend
-//         const { username, password } = req.body;
+export const login = async (req, res) => {
+    try {
+        //fetch username and password from frontend
+        const { email, password } = req.body;
 
-//         //find the user and check if credentials are correct
-//         const user = await userModel.findOne({ username });
-//         const isPasswordCorrect = await bcrypt.compare(password, user?.password || "");
+        //find the user and check if credentials are correct
+        const user = await userModel.findOne({ email });
+        const isPasswordCorrect = await bcrypt.compare(password, user?.password || "");
 
-//         if (!user || !isPasswordCorrect)
-//             return res.status(400).json({ success: false, message: "Invalid Credentials" })
+        if (!user || !isPasswordCorrect)
+            return res.status(400).json({ success: false, message: "Invalid Credentials" })
 
-//         //generate token if everything went right and response
-//         generateTokenAndSetCookie(user._id, res);
+        //generate token if everything went right and response
+        generateTokenAndSetCookie(user._id, res);
 
-//         return res.status(201).json({
-//             success: true, result: {
-//                 _id: user._id,
-//                 fullName: user.fullName,
-//                 username: user.username,
-//                 gender: user.gender,
-//                 profilePicture: user.profilePicture,
-//             }
-//         });
+        return res.status(201).json({
+            success: true, user: {
+                ...user, password: undefined
+            }
+        });
 
-//     } catch (error) {
-//         console.log("Error in Login \n", error);
-//         return res.status(500).json({ success: false, message: "Internal Server Error" });
-//     }
-// }
+    } catch (error) {
+        console.log("Error in Login \n", error);
+        return res.status(500).json({ success: false, message: "Internal Server Error" });
+    }
+}
 
-// export const logout = (req, res) => {
-//     try {
-//         //delete token by setting expire time to current time
-//         res.cookie("token", "", { maxAge: 0 });
-//         return res.status(200).json({ success: true, message: "Logged Out Successfully" });
+export const logout = (req, res) => {
+    try {
+        //delete token by setting expire time to current time
+        res.cookie("token", "", { maxAge: 0 });
+        return res.status(200).json({ success: true, message: "Logged Out Successfully" });
 
-//     } catch (error) {
-//         console.log("Error in Login \n", error);
-//         return res.status(500).json({ success: false, message: "Internal Server Error" });
-//     }
-// }
+    } catch (error) {
+        console.log("Error in Login \n", error);
+        return res.status(500).json({ success: false, message: "Internal Server Error" });
+    }
+}
