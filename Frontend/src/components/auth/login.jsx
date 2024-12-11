@@ -3,14 +3,25 @@ import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import UseLogin from '../../hooks/auth/UseLogin';
 const LoginForm = () => {
 
   const [loginDetails, setLoginDetails] = useState({
     email: "",
     password: ""
   })
+
+  const {login, isLoading} = UseLogin();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const {email, password} = loginDetails
+    console.log(email, password)
+    await login(email, password);
+  }
+
   return (
-    <form action={""} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="email">Email</Label>
             <Input id="email" name="email" type="email" onChange={(e) => setLoginDetails({...loginDetails, email:e.target.value})} required />
@@ -33,4 +44,5 @@ const LoginForm = () => {
         </form>
   )
 }
+
 export default LoginForm;
