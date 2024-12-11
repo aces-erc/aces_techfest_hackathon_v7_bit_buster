@@ -10,21 +10,51 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import UseSignup from "../../hooks/auth/UseSignup";
 
 const RegistrationForm = () => {
   const avatarRef = useRef();
   const citizenshipRef = useRef();
+
   const [avatar, setAvatar] = useState(null);
   const [citizenship, setCitizenship] = useState(null);
+
+  const [userData, setUserData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    contact: "",
+    citizenShipNumber: "",
+    role: "user",
+    bloodGroup: "",
+    age: "",
+    lastDonationDate: Date.now(),
+    password: "",
+    confirmPassword: "",
+    gender: ""
+  })
+
+  const { signup, isLoading } = UseSignup();
+
+  const handleSignup = async (e) => {
+    e.preventDefault();
+
+    const { fullName, email, password, confirmPassword } = userData;
+    const success = await signup({ fullName, email, password, confirmPassword, setCurrentUser, imageFile: image });
+
+    if (success)
+      setSignupPromptVisible(false);
+  }
+
   return (
     <form className="space-y-4">
       <div className="space-y-2">
-        <Label htmlFor="username">Username</Label>
-        <Input id="username" name="username" required />
+        <Label htmlFor="username">Email {userData.email}</Label>
+        <Input onChange={(e) => setUserData({ ...userData, [e.target.name]: e.target.value })} value={userData.email} type="email" name="email" required />
       </div>
       <div className="space-y-2">
         <Label htmlFor="role">Role</Label>
-        <Select name="role" required>
+        <Select onValueChange={(e) => setUserData({ ...userData, role: e })} name="role" required>
           <SelectTrigger>
             <SelectValue placeholder="Select role" />
           </SelectTrigger>
@@ -104,7 +134,7 @@ const RegistrationForm = () => {
             className="h-full mx-8 grid border-dotted border-2 border-indigo-600 items-center cursor-pointer"
             onClick={() => citizenshipRef.current.click()}
           >
-            {avatar ? (
+            {citizenship ? (
               <img
                 src={URL.createObjectURL(citizenship)}
                 alt="citizenship"
