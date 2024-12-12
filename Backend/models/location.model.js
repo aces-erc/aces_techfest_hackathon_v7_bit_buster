@@ -1,10 +1,8 @@
 import mongoose from "mongoose";
 
 const locationSchema = new mongoose.Schema({
-    city: { type: String, required: true },
-    state: { type: String, required: true },
-    country: { type: String, required: true },
-    postalCode: { type: String },
+    latitude: {type:Number, required:true},
+    longitude: {type:Number, required:true},
 });
 
 const locationModel = mongoose.models.locationModel || mongoose.model("locationModel", locationSchema);
