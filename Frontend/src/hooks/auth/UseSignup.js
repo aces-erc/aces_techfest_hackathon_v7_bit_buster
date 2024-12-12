@@ -1,8 +1,10 @@
 import { axiosInstance } from '@/lib/axios';
 import { useState } from 'react';
+import { useToast } from "@/hooks/use-toast"
 // import { toast } from 'react-toastify';
 
 const UseSignup = () => {
+    const {toast} = useToast();
 
     const [isLoading, setIsLoading] = useState(false);
 
@@ -67,6 +69,10 @@ const UseSignup = () => {
 
             if (!response.data.success) {
                 // toast.error(response.data.message)
+                toast({
+                    variant: "destructive",
+                    description: response.data.message,
+                  })
                 console.log(response.data.message);
 
                 return false;
@@ -75,11 +81,17 @@ const UseSignup = () => {
             // setCurrentUser(response.data.result.user);
 
             // toast.success("signup successful");
+            toast({
+                description: "signup successful",
+              })
             console.log("signup successful");
 
             return true;
         } catch (error) {
-            // toast.error(error.response.data.message);
+            toast({
+                variant: "destructive",
+                description: error.response.data.message,
+              })
             console.log(error);
             return false;
         } finally {
