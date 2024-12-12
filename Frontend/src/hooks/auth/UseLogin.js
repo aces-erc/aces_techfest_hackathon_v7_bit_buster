@@ -1,10 +1,12 @@
 import { axiosInstance } from '@/lib/axios'
 import { useState } from 'react';
 import { useToast } from "@/hooks/use-toast"
+import { useNavigate } from 'react-router-dom';
 
 const UseLogin = () => {
     const [isLoading, setIsLoading] = useState(false);
     const {toast} = useToast();
+    const navigate = useNavigate();
     const login = async (email, password ) => {
         console.log(email, password)
         setIsLoading(true);
@@ -39,7 +41,7 @@ const UseLogin = () => {
             toast({
                 description: "Login Successful!",
               })
-
+            window.location.reload();
             // toast.success("Logged in successfully");
             return true;
         } catch (error) {
