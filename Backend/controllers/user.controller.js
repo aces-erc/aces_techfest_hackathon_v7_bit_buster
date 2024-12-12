@@ -2,7 +2,7 @@ import userModel from "../models/user.model.js";
 
 export const getActiveDonors = async (req, res) => {
     try {
-        const activeDonors = await userModel.find({ role: "user", isactive: true });
+        const activeDonors = await userModel.find({ role: "user", isactive: true }).select("-password");
         res.status(200).json({ success: true, activeDonors });
     } catch (error) {
         console.log(error);
@@ -12,7 +12,7 @@ export const getActiveDonors = async (req, res) => {
 
 export const getDonorById = async (req, res) => {
     try {
-        const donor = await userModel.findById(req.params.id);
+        const donor = await userModel.findById(req.params.id).select("-password");
         res.status(200).json({ success: true, donor });
     } catch (error) {
         console.log(error);
@@ -22,7 +22,7 @@ export const getDonorById = async (req, res) => {
 
 export const getDoctors = async (req, res) => {
     try {
-        const doctors = await userModel.find({ role: "doctor" });
+        const doctors = await userModel.find({ role: "doctor" }).select("-password");
         res.status(200).json({ success: true, doctors });
     } catch (error) {
         console.log(error);
@@ -32,7 +32,7 @@ export const getDoctors = async (req, res) => {
 
 export const getHospitals = async (req, res) => {
     try {
-        const hospitals = await userModel.find({ role: "hospital" });
+        const hospitals = await userModel.find({ role: "hospital" }).select("-password");
         res.status(200).json({ success: true, hospitals });
     } catch (error) {
         console.log(error);
@@ -45,7 +45,7 @@ export const getNearbyUsers = async (req, res) => {
         const { lat1, lon1, lat2, lon2 } = req.body;
         const distance = calculateDistance(lat1, lon1, lat2, lon2);
 
-        const mockNearbyDonors = await userModel.find({ role: "user", isactive: true });
+        const mockNearbyDonors = await userModel.find({ role: "user", isactive: true }).select("-password");
 
         const nearbyUsers = mockNearbyDonors.sort((a, b) => {
             const distA = calculateDistance(userLocation.lat, userLocation.lng, a.lat, a.lng)

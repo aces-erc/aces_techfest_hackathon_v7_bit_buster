@@ -32,9 +32,17 @@ const UseSignup = () => {
             !citizenShipNumber ||
             !role ||
             !bloodGroup ||
-            !gender
+            !gender ||
+            !age ||
+            !firstName ||
+            !lastName ||
+            !avatar ||
+            !citizenship
         )
-            return console.log("please fill all the fields");
+            return toast({
+                variant: "destructive",
+                description: "Please fill out all the fields",
+            });
 
         setIsLoading(true);
         try {
@@ -52,12 +60,8 @@ const UseSignup = () => {
             formData.append("lastDonationDate", Date.now());
             formData.append("gender", gender);
 
-            if (avatar) {
-                formData.append("profileImageFile", avatar);
-            }
-            if (citizenship) {
-                formData.append("citizenshipImageFile", citizenship);
-            }
+            formData.append("profileImageFile", avatar);
+            formData.append("citizenshipImageFile", citizenship);
 
             const res = await fetch("http://localhost:8000/api/auth/signup", {
                 method: "POST",
@@ -68,28 +72,6 @@ const UseSignup = () => {
             const data = await res.json();
 
 
-            // console.log(formData);
-
-            // const response = await axiosInstance.post("/auth/signup", {
-            //     firstName,
-            //     lastName,
-            //     email,
-            //     password,
-            //     confirmPassword,
-            //     contact,
-            //     citizenShipNumber,
-            //     role,
-            //     bloodGroup,
-            //     age,
-            //     lastDonationDate,
-            //     gender,
-            // });
-            // const res = await fetch("http://localhost:3000/api/auth/signup", {
-            //     method: "POST",
-            //     body: formData
-            // })
-
-            // const data = await res.json();
 
             if (!data.success) {
                 // toast.error(response.data.message)
@@ -102,12 +84,7 @@ const UseSignup = () => {
                 return false;
             }
 
-            // setCurrentUser(response.data.result.user);
-
-            // toast.success("signup successful");
-            toast({
-                description: "signup successful",
-            });
+            toast({ description: "signup successful" });
             console.log("signup successful");
 
             window.location.reload();

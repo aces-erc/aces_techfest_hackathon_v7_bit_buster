@@ -4,8 +4,8 @@ export const createAppointment = async (req, res) => {
     try {
         const { doctorId, clientId, date } = req.body;
 
-        const doctor = await userModel.findById(doctorId);
-        const client = await userModel.findById(clientId);
+        const doctor = await userModel.findById(doctorId).select("-password");
+        const client = await userModel.findById(clientId).select("-password");
 
         if (!doctor || !client)
             return res.status(400).json({ success: false, message: "Invalid Request" });
