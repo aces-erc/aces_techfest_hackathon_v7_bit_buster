@@ -129,8 +129,8 @@ const UseSignup = () => {
       }
     }
 
-    return { signup, isLoading };
   };
+  return { signup, isLoading };
 };
 
 export default UseSignup;
