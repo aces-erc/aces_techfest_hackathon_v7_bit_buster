@@ -12,16 +12,6 @@ const Map = ({donorsData, receptorsData}) => {
       setCurrentLocation([position.coords.latitude, position.coords.longitude]);
     });
   }, []);
-  const bins = [
-    { id: 1, name: "prabin ko chak 1", lat: 26.7952611, lng: 87.2891011 },
-    { id: 2, name: "NeuroBin 2", lat: 26.794893, lng: 87.294081 },
-    { id: 3, name: "NeuroBin 3", lat: 26.792109, lng: 87.298796 },
-    { id: 4, name: "NeuroBin 4", lat: 26.792436, lng: 87.293279 },
-    { id: 5, name: "NeuroBin 5", lat: 26.7989239, lng: 87.29554 },
-    { id: 6, name: "NeuroBin 6", lat: 26.789972, lng: 87.290778 },
-    { id: 7, name: "NeuroBin 7", lat: 26.801238, lng: 87.289376 },
-    // Add more bins as needed
-  ];
 
   const donorMarkerIcon = new L.Icon({
     iconUrl: "/images/redcross.png",
@@ -87,7 +77,7 @@ const Map = ({donorsData, receptorsData}) => {
           >
             <Link to={`/user/${receptors.requestUserId}`}>
             <Popup>
-              <span className="text-lg">{receptors.urgencyLevel}</span>
+              <span className="">{receptors.urgencyLevel}</span>
                 <span className="p-1 rounded-md bg-red-200 px-2 m-2">{receptors.bloodGroup}</span>
             </Popup>
             </Link>
