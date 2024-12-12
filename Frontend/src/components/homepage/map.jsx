@@ -1,102 +1,126 @@
 import React, { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { Link } from "react-router-dom";
 
-const Map = ({donorsData, receptorsData}) => {
-  const [currentLocation, setCurrentLocation] = useState([
-    26.7929645, 87.2897815,
-  ]);
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition((position) => {
-      setCurrentLocation([position.coords.latitude, position.coords.longitude]);
-    });
-  }, []);
-  const bins = [
-    { id: 1, name: "prabin ko chak 1", lat: 26.7952611, lng: 87.2891011 },
-    { id: 2, name: "NeuroBin 2", lat: 26.794893, lng: 87.294081 },
-    { id: 3, name: "NeuroBin 3", lat: 26.792109, lng: 87.298796 },
-    { id: 4, name: "NeuroBin 4", lat: 26.792436, lng: 87.293279 },
-    { id: 5, name: "NeuroBin 5", lat: 26.7989239, lng: 87.29554 },
-    { id: 6, name: "NeuroBin 6", lat: 26.789972, lng: 87.290778 },
-    { id: 7, name: "NeuroBin 7", lat: 26.801238, lng: 87.289376 },
-    // Add more bins as needed
-  ];
+// Custom marker icons based on urgency level
+const getMarkerIcon = (urgencyLevel) => {
+  let iconUrl = "/images/greenheart.png"; // Default icon
+  let iconClassName = ""; // For potential animations
 
-  const donorMarkerIcon = new L.Icon({
-    iconUrl: "/images/redcross.png",
-    iconSize: [32, 32], // Size of the icon
-    iconAnchor: [16, 32], // Point of the icon that corresponds to the marker's location
-    popupAnchor: [0, -32], // Point from which the popup should open relative to the iconAnchor
+  switch(urgencyLevel) {
+    case "immediately":
+      iconUrl = "/images/redcross-urgent.png";
+      iconClassName = "animate-pulse"; // Pulsing animation for immediate urgency
+      break;
+    case "24hours":
+      iconUrl = "/images/redcross-high.png";
+      iconClassName = "animate-bounce"; // Bouncing animation for 24-hour urgency
+      break;
+    case "3days":
+      iconUrl = "/images/redcross-medium.png";
+      iconClassName = "animate-wiggle"; // Subtle wiggle for 3-day urgency
+      break;
+    default:
+      break;
+  }
+
+  return L.divIcon({
+    className: `custom-marker-icon ${iconClassName}`,
+    html: `<img src="${iconUrl}" class="w-8 h-8" />`,
+    iconSize: [32, 32],
+    iconAnchor: [16, 32],
+    popupAnchor: [0, -32]
   });
-  
-  const receptorMarkerIcon = new L.Icon({
-    iconUrl: "/images/greenheart.png",
-    iconSize: [32, 32], // Size of the icon
-    iconAnchor: [16, 32], // Point of the icon that corresponds to the marker's location
-    popupAnchor: [0, -32], // Point from which the popup should open relative to the iconAnchor
-  });
+};
+
+const BloodDonationMap = ({ donorsData, receptorsData }) => {
+  const [currentLocation, setCurrentLocation] = useState([26.7929645, 87.2897815]);
+
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setCurrentLocation([
+            position.coords.latitude, 
+            position.coords.longitude
+          ]);
+        },
+        (error) => {
+          console.error("Error obtaining location", error);
+        }
+      );
+    }
+  }, []);
+
+  const handleLocationUpdate = () => {
+    location.reload();
+  };
 
   return (
-    <div id="map" className="rounded-md my-4">
-      <MapContainer
-        center={currentLocation}
-        zoom={13}
-        style={{ height: "500px", width: "100%", borderRadius: "6px" }}
-        className="z-10"
+    <div className="relative w-full h-[600px]">
+      <MapContainer 
+        center={currentLocation} 
+        zoom={13} 
+        className="h-full w-full"
       >
         <TileLayer
-          url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          className="rounded-md"
         />
-        <Marker position={currentLocation}>
-          <Popup>
-            This is your current location.&nbsp;
-            <span
-              onClick={() => {
-                location.reload();
-              }}
-              className="cursor-pointer text-primary"
-            >
-              Update
-            </span>
-          </Popup>
+
+        {/* Current Location Marker */}
+        <Marker position={currentLocation} icon={getMarkerIcon()}>
+          <Popup>This is your current location.</Popup>
         </Marker>
-        {donorsData.map((donor) => {
-          if(donor.location) return (
-          <Marker
-            key={donor._id}
-            position={[donor?.location?.latitude, donor?.location?.longitude]}
-            icon={donorMarkerIcon}
-          >
-           <Link to={`/user/${donor._id}`}> <Popup>
-              <span className="text-lg font-semibold m-2">{donor.firstName}</span>
-                <span className="p-1 bg-orange-300 rounded-md">{donor.bloodGroup}</span>
-            </Popup>
-            </Link>
-          </Marker>
+
+        {/* Donors Markers */}
+        {donorsData.map((donor, index) => (
+          donor.location && (
+            <Marker 
+              key={`donor-${index}`}
+              position={[donor.location.latitude, donor.location.longitude]}
+              icon={getMarkerIcon(donor.urgencyLevel)}
+            >
+              <Popup>
+                <div>
+                  <h3>{donor.firstName}</h3>
+                  <p>Blood Group: {donor.bloodGroup}</p>
+                  <p>Urgency: {donor.urgencyLevel}</p>
+                </div>
+              </Popup>
+            </Marker>
           )
-})}
-        {receptorsData.map((receptors) => {
-          if(receptors.locat) return (
-          <Marker
-            key={receptors.updatedAt}
-            position={[receptors?.locat?.lat, receptors?.locat?.long]}
-            icon={receptorMarkerIcon}
-          >
-            <Link to={`/user/${receptors.requestUserId}`}>
-            <Popup>
-              <span className="text-lg">{receptors.urgencyLevel}</span>
-                <span className="p-1 rounded-md bg-red-200 px-2 m-2">{receptors.bloodGroup}</span>
-            </Popup>
-            </Link>
-          </Marker>
+        ))}
+
+        {/* Receptors Markers */}
+        {receptorsData.map((receptor, index) => (
+          receptor.location && (
+            <Marker 
+              key={`receptor-${index}`}
+              position={[receptor.location.latitude, receptor.location.longitude]}
+              icon={getMarkerIcon(receptor.urgencyLevel)}
+            >
+              <Popup>
+                <div>
+                  <p>Urgency Level: {receptor.urgencyLevel}</p>
+                  <p>Blood Group: {receptor.bloodGroup}</p>
+                </div>
+              </Popup>
+            </Marker>
           )
-})}
+        ))}
       </MapContainer>
+
+      <button 
+        onClick={handleLocationUpdate}
+        className="absolute bottom-4 right-4 z-[1000] bg-primary text-white px-4 py-2 rounded"
+      >
+        Update Location
+      </button>
     </div>
   );
 };
 
-export default Map;
+export default BloodDonationMap;
