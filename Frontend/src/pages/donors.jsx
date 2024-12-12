@@ -35,7 +35,7 @@ const Donors = () => {
   const [bloodGroup, setBloodGroup] = useState("")
   return (
     <div className="my-4">
-      <h1>Donors List</h1>
+      <h1 className="text-3xl text-left my-2 font-semibold">Donors List</h1>
       <div className="flex flex-col sm:flex-row w-full gap-2 sm:gap-4">
         <Input
           type="search"
