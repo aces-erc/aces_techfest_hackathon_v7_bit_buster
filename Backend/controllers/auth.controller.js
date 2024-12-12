@@ -23,7 +23,8 @@ export const signup = async (req, res) => {
             lastDonationDate,
             password,
             confirmPassword,
-            gender
+            gender,
+            position
         } = req.body;
 
         // console.log(req.body);
@@ -55,20 +56,23 @@ export const signup = async (req, res) => {
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
 
+        const locationTemp = JSON.parse(position);
+
         //fields to be used while creating user
         let updateFields = {
             firstName,
             lastName,
             email,
             password: hashedPassword,
-            location: { latitude: "0", longitude: "0" },
+            location: { latitude: locationTemp.lat, longitude: locationTemp.lng },
             bloodGroup,
             age,
             citizenShipNumber,
             gender,
             contact,
             role,
-            lastDonationDate
+            lastDonationDate,
+            // location: JSON.parse(position)
         }
 
         //upload file to cloudonary and get its url

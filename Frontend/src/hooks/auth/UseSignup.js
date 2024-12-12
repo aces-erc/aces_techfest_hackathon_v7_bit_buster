@@ -22,7 +22,8 @@ const UseSignup = () => {
         confirmPassword,
         gender,
         avatar,
-        citizenship
+        citizenship,
+        position
     }) => {
         if (
             !email ||
@@ -37,11 +38,12 @@ const UseSignup = () => {
             !firstName ||
             !lastName ||
             !avatar ||
-            !citizenship
+            !citizenship ||
+            !position
         )
             return toast({
                 variant: "destructive",
-                description: "Please fill out all the fields",
+                description: "Please fill out all the fields and select your address",
             });
 
         setIsLoading(true);
@@ -59,6 +61,7 @@ const UseSignup = () => {
             formData.append("age", age);
             formData.append("lastDonationDate", Date.now());
             formData.append("gender", gender);
+            formData.append("gender", JSON.stringify(position));
 
             formData.append("profileImageFile", avatar);
             formData.append("citizenshipImageFile", citizenship);
