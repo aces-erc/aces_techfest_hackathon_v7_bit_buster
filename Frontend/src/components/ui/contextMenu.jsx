@@ -1,22 +1,12 @@
 import {
-  Cloud,
-  CreditCard,
-  Github,
-  Keyboard,
-  LifeBuoy,
-  Link,
   LogOut,
   Mail,
   MessageSquare,
-  Plus,
-  PlusCircle,
-  Settings,
   User,
   UserPlus,
-  Users,
+,
 } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -25,7 +15,6 @@ import {
   DropdownMenuLabel,
   DropdownMenuPortal,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
   DropdownMenuSub,
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
