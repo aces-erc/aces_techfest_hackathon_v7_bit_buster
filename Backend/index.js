@@ -6,6 +6,7 @@ import express from "express";
 import connectToDatabase from "./database/connection.js";
 import authRouter from "./routes/auth.route.js";
 import userRouter from "./routes/user.route.js";
+import appointmentRouter from "./routes/appointment.route.js";
 
 const app = express();
 const PORT = process.env.PORT;
@@ -23,6 +24,7 @@ app.use(cors({
 //route middlewares
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
+app.use("/api/appointment", appointmentRouter);
 
 
 
