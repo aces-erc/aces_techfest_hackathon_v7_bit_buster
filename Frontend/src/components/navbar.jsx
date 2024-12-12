@@ -13,7 +13,7 @@ const Navbar = () => {
   }, [location]);
 
   return (
-    <div className="flex flex-col sm:flex-row w-full justify-between items-center relative top-0">
+    <div className="flex flex-col sm:flex-row w-full justify-between items-center sticky top-0 z-20 backdrop-blur-md">
       <div>
        <Link to="/home"><img src="/images/logo.png" className="w-auto h-20"/></Link> 
       </div>
