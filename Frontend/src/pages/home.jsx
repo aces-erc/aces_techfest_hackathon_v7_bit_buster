@@ -5,7 +5,6 @@ import { Navigate } from 'react-router-dom';
 const Home = () => {
   return (
     <>
-    {!authUser && (<Navigate to="/" replace={true} />)}
     <h1>Hello world</h1>
     </>
   )
