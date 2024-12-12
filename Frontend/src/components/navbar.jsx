@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import ContextMenu from "./ui/contextMenu";
 
 const Navbar = () => {
   return (
@@ -17,10 +17,7 @@ const Navbar = () => {
             <Button>Login</Button>
           </li>
         </ul>
-        <Avatar>
-          <AvatarImage src="https://static.wikia.nocookie.net/beluga-characters/images/6/64/Beluga4.jpg" alt="@shadcn" />
-          <AvatarFallback>CN</AvatarFallback>
-        </Avatar>
+        <ContextMenu />
       </div>
     </div>
   );
