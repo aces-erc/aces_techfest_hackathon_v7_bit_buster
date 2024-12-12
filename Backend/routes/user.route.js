@@ -1,5 +1,5 @@
 import express from 'express';
-import { getActiveDonors } from '../controllers/user.controller';
+import { getActiveDonors, getDoctors, getDonorById } from '../controllers/user.controller.js';
 
 const userRouter = express.Router();
 

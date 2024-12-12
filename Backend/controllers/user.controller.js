@@ -1,4 +1,4 @@
-import userModel from "../models/user.model";
+import userModel from "../models/user.model.js";
 
 export const getActiveDonors = async (req, res) => {
     try {
@@ -71,8 +71,8 @@ const calculateDistance = (lat1, lon1, lat2, lon2) => {
     return R * c
 }
 
-const sortedDonors = mockNearbyDonors.sort((a, b) => {
-    const distA = calculateDistance(userLocation.lat, userLocation.lng, a.lat, a.lng)
-    const distB = calculateDistance(userLocation.lat, userLocation.lng, b.lat, b.lng)
-    return distA - distB
-})
+// const sortedDonors = mockNearbyDonors.sort((a, b) => {
+//     const distA = calculateDistance(userLocation.lat, userLocation.lng, a.lat, a.lng)
+//     const distB = calculateDistance(userLocation.lat, userLocation.lng, b.lat, b.lng)
+//     return distA - distB
+// })
