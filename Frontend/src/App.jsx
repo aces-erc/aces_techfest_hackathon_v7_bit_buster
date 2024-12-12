@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import './App.css'
 import Landing from './pages/landing'
 import Home from './pages/home'
@@ -16,17 +16,18 @@ function App() {
   useEffect(() => {
     checkAuth();
   }, [])
+  
 
   return (
     <div style={{ fontFamily: "Poppins, sans-serif" }}>
       <Routes>
         <Route element={<Layout />}>
-          <Route path="/home" element={<Home />} />
-          <Route path="/donors" element={<Donors />} />
-          <Route path="/request" element={<Request />} />
-          <Route path="/appointment" element={<Appointment />} />
+          <Route path="/home" element={authUser ? <Home /> : <Navigate to="/" replace={true} />} />
+          <Route path="/donors" element={authUser ? <Donors /> : <Navigate to="/" replace={true} />} />
+          <Route path="/request" element={authUser ? <Request /> : <Navigate to="/" replace={true} />} />
+          <Route path="/appointment" element={authUser ? <Appointment /> : <Navigate to="/" replace={true} />} />
         </Route>
-        <Route path="/" element={<Landing />} />
+        <Route path="/" element={authUser? <Navigate to="/home" replace={true} /> : <Landing />} />
       </Routes>
       <Toaster />
     </div>
