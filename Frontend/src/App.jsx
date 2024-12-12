@@ -9,14 +9,13 @@ import Layout from './pages/layout'
 import Donors from './pages/donors'
 import Request from './pages/request'
 import Appointment from './pages/appointment'
-
+// import { db } from './firebase/firebaseconfig'
 function App() {
   const { checkAuth, authUser } = UseAuthStore()
-
   useEffect(() => {
     checkAuth();
   }, [])
-  
+
 
   return (
     <div style={{ fontFamily: "Poppins, sans-serif" }}>
