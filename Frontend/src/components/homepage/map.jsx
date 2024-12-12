@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 
-const Map = () => {
+const Map = ({donorsData, receptorsData}) => {
   const [currentLocation, setCurrentLocation] = useState([
     26.7929645, 87.2897815,
   ]);
@@ -22,8 +22,15 @@ const Map = () => {
     // Add more bins as needed
   ];
 
-  const customMarkerIcon = new L.Icon({
-    iconUrl: "/images/logo_bin.png",
+  const donorMarkerIcon = new L.Icon({
+    iconUrl: "/images/redcross.png",
+    iconSize: [32, 32], // Size of the icon
+    iconAnchor: [16, 32], // Point of the icon that corresponds to the marker's location
+    popupAnchor: [0, -32], // Point from which the popup should open relative to the iconAnchor
+  });
+  
+  const receptorMarkerIcon = new L.Icon({
+    iconUrl: "/images/greenheart.png",
     iconSize: [32, 32], // Size of the icon
     iconAnchor: [16, 32], // Point of the icon that corresponds to the marker's location
     popupAnchor: [0, -32], // Point from which the popup should open relative to the iconAnchor
@@ -55,17 +62,32 @@ const Map = () => {
             </span>
           </Popup>
         </Marker>
-        {bins.map((bin) => (
+        {donorsData.map((donor) => {
+          if(donor.location) return (
           <Marker
-            key={bin.id}
-            position={[bin.lat, bin.lng]}
-            icon={customMarkerIcon}
+            key={donor._id}
+            position={[donor?.location?.latitude, donor?.location?.longitude]}
+            icon={donorMarkerIcon}
           >
-            <Popup>{bin.name}
-                <button>click me</button>
+            <Popup>{donor.firstName}<br/>
+                <button>Contact</button>
             </Popup>
           </Marker>
-        ))}
+          )
+})}
+        {receptorsData.map((receptors) => {
+          if(receptors.locat) return (
+          <Marker
+            key={receptors.updatedAt}
+            position={[receptors?.locat?.lat, receptors?.locat?.long]}
+            icon={receptorMarkerIcon}
+          >
+            <Popup>{receptors.firstName}<br/>
+                <button>Contact</button>
+            </Popup>
+          </Marker>
+          )
+})}
       </MapContainer>
     </div>
   );

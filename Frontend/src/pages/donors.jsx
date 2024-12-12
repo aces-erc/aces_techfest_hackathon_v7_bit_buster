@@ -45,7 +45,7 @@ const Donors = () => {
   useEffect(() => {
     const fetchDonors = async () => {
       const donorsData = await getDonorsData();
-      
+      console.log(donorsData)
       setDonors(donorsData);
     };
     fetchDonors();
