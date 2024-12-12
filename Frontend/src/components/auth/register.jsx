@@ -98,6 +98,7 @@ const RegistrationForm = () => {
       gender,
       avatar,
       citizenship,
+      position
     });
   };
 
