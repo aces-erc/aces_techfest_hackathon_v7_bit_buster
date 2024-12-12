@@ -1,67 +1,65 @@
+import React from "react";
 import { Button } from "@/components/ui/button";
 import DialogDemo from "../auth/triggerBtn";
+import { Heart, Droplet, Users } from "lucide-react";
 
 const HeroSection = () => {
   return (
-    <div className="relative my-4 overflow-hidden">
-      <div className="absolute inset-0">
-        <img
-          className="w-full h-full object-cover sm:object-scale-down"
-          src="https://www.cpsmumbai.org/Uploads/2762023161833920.png"
-          alt="Blood donation"
-        />
-        <div className="absolute inset-0 mix-blend-multiply opacity-40" />
-      </div>
-      <div className="relative px-4 sm:px-6 lg:px-8 py-24 md:py-32 bg-primary/40 rounded-sm">
-        <div className="md:w-2/3 lg:w-1/2">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-secondary leading-tight">
-            Give the gift of life:
-            <span className="block text-primary-">Donate Blood Today</span>
+    <div className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-red-50 to-white py-16 px-4">
+      <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center">
+        {/* Text Content */}
+        <div className="space-y-6 text-center md:text-left">
+          <h1 className="text-4xl md:text-5xl font-bold text-red-800 leading-tight">
+            <span className="block">Give the Gift of Life:</span>
+            <span className="block text-red-600">Donate Blood Today</span>
           </h1>
-          <p className="mt-6 text-xl md:text-2xl text-secondary/70 max-w-3xl">
+
+          <p className="text-lg text-gray-700 mb-6">
             Your donation can save up to three lives. Join our community of
             heroes and make a difference in someone's life today. Every drop
             counts!
           </p>
-          <div className="mt-10 flex flex-col sm:flex-row gap-4">
-            <DialogDemo
-              login={true}
-              styles="py-3 border border-transparent text-base font-medium rounded-md text-white bg-red-600 hover:bg-red-700 md:py-4 md:text-lg md:px-8 "
-            />
-            <DialogDemo
-              login={false}
-              styles="py-3 shadow-sm text-primary font-medium rounded-md border-[1px]  hover:bg-gray-200 md:py-4 md:text-lg md:px-8 "
-            ></DialogDemo>
+
+          {/* Impact Statistics */}
+          <div className="grid grid-cols-3 gap-4 mb-8">
+            <div className="bg-red-50 p-4 rounded-lg text-center">
+              <Droplet className="mx-auto text-red-600 mb-2" size={32} />
+              <span className="block font-bold text-red-800">3 Lives</span>
+              <span className="text-sm text-gray-600">Saved per Donation</span>
+            </div>
+            <div className="bg-red-50 p-4 rounded-lg text-center">
+              <Heart className="mx-auto text-red-600 mb-2" size={32} />
+              <span className="block font-bold text-red-800">1 Hour</span>
+              <span className="text-sm text-gray-600">Your Time</span>
+            </div>
+            <div className="bg-red-50 p-4 rounded-lg text-center">
+              <Users className="mx-auto text-red-600 mb-2" size={32} />
+              <span className="block font-bold text-red-800">1000+</span>
+              <span className="text-sm text-gray-600">Donors</span>
+            </div>
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+            <Button variant="destructive" className="w-full sm:w-auto">
+              Donate Now
+            </Button>
+            <DialogDemo className="w-full sm:w-auto" />
           </div>
         </div>
-      </div>
-      <div className="absolute bottom-0 right-0 w-full md:w-1/2 lg:w-2/3 h-1/3 md:h-2/3 -z-10">
-        <svg
-          className="absolute bottom-0 right-0 transform translate-x-1/2 mb-48 text-red-400 lg:top-0 lg:mt-28 lg:mb-0 xl:transform-none xl:translate-x-0"
-          width="364"
-          height="384"
-          viewBox="0 0 364 384"
-          fill="none"
-        >
-          <defs>
-            <pattern
-              id="eab71dd9-9d7a-47bd-8044-256344ee00d0"
-              x="0"
-              y="0"
-              width="20"
-              height="20"
-              patternUnits="userSpaceOnUse"
-            >
-              <rect x="0" y="0" width="4" height="4" fill="currentColor" />
-            </pattern>
-          </defs>
-          <rect
-            width="364"
-            height="384"
-            fill="url(#eab71dd9-9d7a-47bd-8044-256344ee00d0)"
+
+        {/* Image Placeholder */}
+        <div className="hidden md:flex justify-center items-center">
+          <img
+            src="/images/hero.png"
+            alt="Blood Donation"
+            className="rounded-xl shadow-lg max-w-full h-auto"
           />
-        </svg>
+        </div>
       </div>
+
+      {/* Background Decoration */}
+      <div className="absolute bottom-0 left-0 right-0 h-16 bg-red-100 opacity-50 clip-path-wave"></div>
     </div>
   );
 };
