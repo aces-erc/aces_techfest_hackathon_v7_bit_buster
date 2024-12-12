@@ -1,21 +1,5 @@
-import {
-  Cloud,
-  CreditCard,
-  Github,
-  Keyboard,
-  LifeBuoy,
-  LogOut,
-  Mail,
-  MessageSquare,
-  Plus,
-  PlusCircle,
-  Settings,
-  User,
-  UserPlus,
-  Users,
-} from "lucide-react";
-
-import { Button } from "@/components/ui/button";
+import { LogOut, Mail, MessageSquare, User, UserPlus } from "lucide-react";
+import { Link } from "react-router-dom";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -24,15 +8,24 @@ import {
   DropdownMenuLabel,
   DropdownMenuPortal,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
   DropdownMenuSub,
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-
+import { axiosInstance } from "../../lib/axios";
 const ContextMenu = () => {
+  const handleLogout = async ()=>{
+    try {
+      await axiosInstance.get("/auth/logout");
+      window.location.href = "/";
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -44,13 +37,13 @@ const ContextMenu = () => {
           />
         </Avatar>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56">
+      <DropdownMenuContent className="w-56 z-10">
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem className="cursor-pointer">
             <User />
-            <span>Profile</span>
+            <Link to="user/dashboard">Profile</Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
@@ -77,7 +70,7 @@ const ContextMenu = () => {
         <DropdownMenuSeparator />
 
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="cursor-pointer">
+        <DropdownMenuItem className="cursor-pointer" onClick={handleLogout}>
           <LogOut />
           <span>Log out</span>
         </DropdownMenuItem>

@@ -32,8 +32,8 @@ const RegistrationForm = () => {
     lastDonationDate: Date.now(),
     password: "",
     confirmPassword: "",
-    gender: ""
-  })
+    gender: "",
+  });
 
   const { signup, isLoading } = UseSignup();
   const navigate = useNavigate();
@@ -64,23 +64,55 @@ const RegistrationForm = () => {
     <form className="space-y-4" onSubmit={handleSignup}>
       <div className="space-y-2">
         <Label htmlFor="firstName">First Name</Label>
-        <Input onChange={(e) => setUserData({ ...userData, firstName: e.target.value })} value={userData.firstName} type="text" name="firstName" required />
+        <Input
+          onChange={(e) =>
+            setUserData({ ...userData, firstName: e.target.value })
+          }
+          value={userData.firstName}
+          type="text"
+          name="firstName"
+          required
+        />
       </div>
       <div className="space-y-2">
         <Label htmlFor="lastName">Last Name</Label>
-        <Input onChange={(e) => setUserData({ ...userData, lastName: e.target.value })} value={userData.lastName} type="text" name="lastName" required />
+        <Input
+          onChange={(e) =>
+            setUserData({ ...userData, lastName: e.target.value })
+          }
+          value={userData.lastName}
+          type="text"
+          name="lastName"
+          required
+        />
       </div>
       <div className="space-y-2">
         <Label htmlFor="username">Email</Label>
-        <Input onChange={(e) => setUserData({ ...userData, email: e.target.value })} value={userData.email} type="email" name="email" required />
+        <Input
+          onChange={(e) => setUserData({ ...userData, email: e.target.value })}
+          value={userData.email}
+          type="email"
+          name="email"
+          required
+        />
       </div>
       <div className="space-y-2">
         <Label htmlFor="username">Age</Label>
-        <Input onChange={(e) => setUserData({ ...userData, age: e.target.value })} value={userData.age} type="number" name="age" required />
+        <Input
+          onChange={(e) => setUserData({ ...userData, age: e.target.value })}
+          value={userData.age}
+          type="number"
+          name="age"
+          required
+        />
       </div>
       <div className="space-y-2">
         <Label htmlFor="role">Role</Label>
-        <Select onValueChange={(e) => setUserData({ ...userData, role: e })} name="role" required>
+        <Select
+          onValueChange={(e) => setUserData({ ...userData, role: e })}
+          name="role"
+          required
+        >
           <SelectTrigger>
             <SelectValue placeholder="Select role" />
           </SelectTrigger>
@@ -97,7 +129,11 @@ const RegistrationForm = () => {
       </div>
       <div className="space-y-2">
         <Label htmlFor="blood-group">Blood Group</Label>
-        <Select onValueChange={(e) => setUserData({ ...userData, bloodGroup: e })} name="blood-group" required>
+        <Select
+          onValueChange={(e) => setUserData({ ...userData, bloodGroup: e })}
+          name="blood-group"
+          required
+        >
           <SelectTrigger>
             <SelectValue placeholder="Select blood group" />
           </SelectTrigger>
@@ -115,7 +151,15 @@ const RegistrationForm = () => {
       </div>
       <div className="space-y-2">
         <Label htmlFor="citizenship">Citizenship Number</Label>
-        <Input onChange={(e) => setUserData({ ...userData, citizenShipNumber: e.target.value })} value={userData.citizenShipNumber} id="citizenship" name="citizenship" required />
+        <Input
+          onChange={(e) =>
+            setUserData({ ...userData, citizenShipNumber: e.target.value })
+          }
+          value={userData.citizenShipNumber}
+          id="citizenship"
+          name="citizenship"
+          required
+        />
       </div>
 
       <div className="gspace-y-2">
@@ -175,7 +219,11 @@ const RegistrationForm = () => {
 
       <div className="space-y-2">
         <Label>Gender</Label>
-        <RadioGroup onChange={(e) => setUserData({ ...userData, gender: e.target.value })} name="gender" className="flex space-x-4">
+        <RadioGroup
+          onChange={(e) => setUserData({ ...userData, gender: e.target.value })}
+          name="gender"
+          className="flex space-x-4"
+        >
           <div className="flex items-center space-x-2">
             <RadioGroupItem value="male" id="male" />
             <Label htmlFor="male">Male</Label>
@@ -193,11 +241,27 @@ const RegistrationForm = () => {
       </div>
       <div className="space-y-2">
         <Label htmlFor="password">Password</Label>
-        <Input onChange={(e) => setUserData({ ...userData, password: e.target.value })} value={userData.password} id="password" name="password" type="password" required />
+        <Input
+          onChange={(e) =>
+            setUserData({ ...userData, password: e.target.value })
+          }
+          value={userData.password}
+          id="password"
+          name="password"
+          type="password"
+          required
+        />
       </div>
       <div className="space-y-2">
         <Label htmlFor="confirmPassword">Confirm Password</Label>
-        <Input onChange={(e) => setUserData({ ...userData, confirmPassword: e.target.value })} value={userData.confirmPassword} type="password" required />
+        <Input
+          onChange={(e) =>
+            setUserData({ ...userData, confirmPassword: e.target.value })
+          }
+          value={userData.confirmPassword}
+          type="password"
+          required
+        />
       </div>
       <Button type="submit" className="w-full">
         Create Account

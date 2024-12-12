@@ -13,9 +13,9 @@ const Navbar = () => {
   }, [location]);
 
   return (
-    <div className="flex flex-col sm:flex-row w-full justify-between items-center">
+    <div className="flex flex-col sm:flex-row w-full justify-between items-center sticky top-0 z-20 backdrop-blur-md">
       <div>
-        <h1 className="font-bold text-4xl text-tert">RedBond</h1>
+       <Link to="/home"><img src="/images/logo.png" className="w-auto h-20"/></Link> 
       </div>
       <div className="flex flex-row justify-bw-2/5 items-center">
         <nav className="flex flex-col sm:flex-row gap-4">
@@ -31,7 +31,7 @@ const Navbar = () => {
           </Link>
           <Link
             to="/request"
-            className={`min-w-fit justify-center self-center${
+            className={`min-w-fit justify-center self-center ${
               url === "/request"
                 ? "underline underline-offset-8 font-semibold"
                 : ""
@@ -41,7 +41,7 @@ const Navbar = () => {
           </Link>
           <Link
             to="/appointment"
-            className={`min-w-fit justify-center self-center${
+            className={`min-w-fit justify-center self-center ${
               url === "/appointment"
                 ? "underline underline-offset-8 font-semibold"
                 : ""
@@ -50,7 +50,7 @@ const Navbar = () => {
             Appointments
           </Link>
           <Link className="flex justify-center align-middle gap-2">
-            <ContextMenu />
+            <ContextMenu className="absolute z-10001" />
             <span className="self-center  sm:hidden">username</span>
           </Link>
         </nav>
