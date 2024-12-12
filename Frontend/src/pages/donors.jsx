@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Search, Droplet, MapPin, Mail, Filter } from "lucide-react";
 import { axiosInstance } from "../lib/axios";
+import { useNavigate } from "react-router-dom";
 
 const Donors = () => {
+  const navigate = useNavigate();
   const [bloodGroup, setBloodGroup] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [donors, setDonors] = useState([]);
@@ -61,6 +63,10 @@ const Donors = () => {
       "O-": "bg-yellow-200 text-yellow-900",
     };
     return colorMap[bloodGroup] || "bg-gray-100 text-gray-800";
+  };
+
+  const handleDonorClick = (donorId) => {
+    navigate(`/user/${donorId}`);
   };
 
   return (
@@ -141,9 +147,10 @@ const Donors = () => {
               {filteredDonors.map((donor, index) => (
                 <tr
                   key={donor._id}
+                  onClick={() => handleDonorClick(donor._id)}
                   className={`
                     ${index % 2 === 0 ? "bg-gray-50" : "bg-white"} 
-                    hover:bg-gray-100 transition-colors
+                    hover:bg-gray-100 transition-colors cursor-pointer
                   `}
                 >
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 cursor-pointer">
