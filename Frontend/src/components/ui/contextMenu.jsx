@@ -15,9 +15,12 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { axiosInstance } from "../../lib/axios";
+import { UseAuthStore } from "../../zustand/AuthStore";
 const ContextMenu = () => {
 
+  const {authUser} = UseAuthStore();
 
+  const {profilePicture, firstName, lastName} = authUser;
   const handleLogout = async (e) => {
     e.preventDefault();
    try{
@@ -35,9 +38,9 @@ const ContextMenu = () => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Avatar className="cursor-pointer">
-          <AvatarFallback>CN</AvatarFallback>
+          <AvatarFallback>{firstName[0]}{lastName[0]}</AvatarFallback>
           <AvatarImage
-            src="https://thispersondoesnotexist.com/"
+            src={profilePicture}
             alt="@shadcn"
           />
         </Avatar>
