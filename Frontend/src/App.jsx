@@ -9,7 +9,7 @@ import Layout from "./pages/layout";
 import Donors from "./pages/donors";
 import Request from "./pages/request";
 import Appointment from "./pages/appointment";
-import userDashboard from "./pages/userDashboard";
+import UserDashboard from "./pages/userDashboard";
 // import { db } from './firebase/firebaseconfig'
 function App() {
   const { checkAuth, authUser } = UseAuthStore();
@@ -44,7 +44,7 @@ function App() {
           <Route
             path="/user/dashboard"
             element={
-              authUser ? <userDashboard /> : <Navigate to="/" replace={true} />
+              authUser ? <UserDashboard /> : <Navigate to="/" replace={true} />
             }
           />
         </Route>

@@ -1,11 +1,4 @@
-import {
-  LogOut,
-  Mail,
-  MessageSquare,
-  User,
-  UserPlus,
-,
-} from "lucide-react";
+import { LogOut, Mail, MessageSquare, User, UserPlus } from "lucide-react";
 import { Link } from "react-router-dom";
 import {
   DropdownMenu,
@@ -21,8 +14,18 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-
+import { axiosInstance } from "../../lib/axios";
 const ContextMenu = () => {
+  const handleLogout = async ()=>{
+    try {
+      await axiosInstance.get("/auth/logout");
+      window.location.href = "/";
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -67,7 +70,7 @@ const ContextMenu = () => {
         <DropdownMenuSeparator />
 
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="cursor-pointer">
+        <DropdownMenuItem className="cursor-pointer" onClick={handleLogout}>
           <LogOut />
           <span>Log out</span>
         </DropdownMenuItem>
