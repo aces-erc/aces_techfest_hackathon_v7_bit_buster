@@ -9,6 +9,7 @@ import Layout from './pages/layout'
 import Donors from './pages/donors'
 import Request from './pages/request'
 import Appointment from './pages/appointment'
+import ImageUpload from './components/imageUpload'
 
 function App() {
   const { checkAuth, authUser } = UseAuthStore()

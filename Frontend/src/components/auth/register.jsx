@@ -14,11 +14,11 @@ import UseSignup from "../../hooks/auth/UseSignup";
 import { useNavigate } from "react-router-dom";
 
 const RegistrationForm = () => {
-  // const avatarRef = useRef();
-  // const citizenshipRef = useRef();
+  const avatarRef = useRef();
+  const citizenshipRef = useRef();
 
-  // const [avatar, setAvatar] = useState(null);
-  // const [citizenship, setCitizenship] = useState(null);
+  const [avatar, setAvatar] = useState(null);
+  const [citizenship, setCitizenship] = useState(null);
 
   const [userData, setUserData] = useState({
     firstName: "",
@@ -42,7 +42,7 @@ const RegistrationForm = () => {
     e.preventDefault();
 
     const { firstName, lastName, email, contact, citizenShipNumber, role, bloodGroup, age, lastDonationDate, password, confirmPassword, gender } = userData;
-    const success = await signup({
+    await signup({
       firstName,
       lastName,
       email,
@@ -55,8 +55,8 @@ const RegistrationForm = () => {
       password,
       confirmPassword,
       gender,
-      // avatar,
-      // citizenship
+      avatar,
+      citizenship
     });
   }
 
@@ -93,7 +93,7 @@ const RegistrationForm = () => {
       </div>
       <div className="space-y-2">
         <Label htmlFor="contact">Contact Number</Label>
-        <Input onChange={(e) => setUserData({ ...userData, contact: e.target.value })} value={userData.contact} name="contact" type="tel" required />
+        <Input onChange={(e) => setUserData({ ...userData, contact: e.target.value })} value={userData.contact} name="contact" type="number" required />
       </div>
       <div className="space-y-2">
         <Label htmlFor="blood-group">Blood Group</Label>
@@ -118,7 +118,7 @@ const RegistrationForm = () => {
         <Input onChange={(e) => setUserData({ ...userData, citizenShipNumber: e.target.value })} value={userData.citizenShipNumber} id="citizenship" name="citizenship" required />
       </div>
 
-      {/*<div className="gspace-y-2">
+      <div className="gspace-y-2">
         <Label htmlFor="picture">Avatar</Label>
         <Input
           onChange={(e) => setAvatar(e.target.files[0])}
@@ -171,7 +171,7 @@ const RegistrationForm = () => {
             )}
           </span>
         </div>
-      </div>*/}
+      </div>
 
       <div className="space-y-2">
         <Label>Gender</Label>

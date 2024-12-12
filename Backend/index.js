@@ -26,7 +26,13 @@ app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
 app.use("/api/appointment", appointmentRouter);
 
-
+// app.post("/upload", upload.fields([{name: "file1", maxCount:1}, {name: "file2", maxCount:1}]), (req, res) => {
+//   console.log(req.files['file1'][0]);
+//   console.log(req.files['file2'][0]);
+//   console.log(req.body.text);
+  
+//   res.json({ message: "File uploaded" });
+// });
 
 app.get("/", (req, res) => {
   res.status(200).json({ Message: "Hello world" });
