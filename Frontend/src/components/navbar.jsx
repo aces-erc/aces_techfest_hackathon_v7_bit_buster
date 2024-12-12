@@ -18,7 +18,7 @@ const Navbar = () => {
           </li>
         </ul>
         <Avatar>
-          <AvatarImage src="https://static.wikia.nocookie.net/beluga-characters/images/d/d9/Beluga.webp/revision/latest/scale-to-width-down/250?cb=20220929123514" alt="@shadcn" />
+          <AvatarImage src="https://static.wikia.nocookie.net/beluga-characters/images/6/64/Beluga4.jpg" alt="@shadcn" />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
       </div>
