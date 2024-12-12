@@ -4,6 +4,7 @@ import {
   Github,
   Keyboard,
   LifeBuoy,
+  Link,
   LogOut,
   Mail,
   MessageSquare,
@@ -50,7 +51,7 @@ const ContextMenu = () => {
         <DropdownMenuGroup>
           <DropdownMenuItem className="cursor-pointer">
             <User />
-            <span>Profile</span>
+            <Link to="user/dashboard">Profile</Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
