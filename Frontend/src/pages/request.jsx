@@ -29,8 +29,10 @@ const RequestForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <div>
+    <form onSubmit={handleSubmit}>
+      <fieldset className="gap-4 flex flex-col sm:grid sm:grid-cols-2 border-2 border-gray-200 p-4 rounded-md my-4 space-y-4 min-h-screen sm:min-h-full">
+      <legend className="text-3xl text-left font-semibold">Request Blood</legend>
+        <div className="flex flex-col">
         <label htmlFor="bloodGroup" className="block text-sm font-medium">
           Blood Group
         </label>
@@ -50,7 +52,7 @@ const RequestForm = () => {
         </Select>
       </div>
 
-      <div>
+      <div className="flex flex-col">
         <label htmlFor="urgencyLevel" className="block text-sm font-medium">
           Urgency Level
         </label>
@@ -70,7 +72,7 @@ const RequestForm = () => {
         </Select>
       </div>
 
-      <div>
+      <div className="flex flex-col">
         <label htmlFor="hospitalId" className="block text-sm font-medium">
           Hospital ID
         </label>
@@ -84,7 +86,7 @@ const RequestForm = () => {
         />
       </div>
 
-      <div>
+      <div className="flex flex-col">
         <label htmlFor="locationId" className="block text-sm font-medium">
           Location ID
         </label>
@@ -98,27 +100,8 @@ const RequestForm = () => {
         />
       </div>
 
-      <div>
-        <label htmlFor="status" className="block text-sm font-medium">
-          Status
-        </label>
-        <Select
-          onValueChange={(value) => handleSelectChange("status", value)}
-          value={formData.status}
-          required
-        >
-          <SelectTrigger id="status">{formData.status || "Select Status"}</SelectTrigger>
-          <SelectContent>
-            {["active", "fulfilled", "cancelled"].map((status) => (
-              <SelectItem key={status} value={status}>
-                {status}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </div>
-
-      <Button type="submit">Submit Request</Button>
+      <Button type="submit" className="col-span-2 w-min mx-auto">Submit Request</Button>
+      </fieldset>
     </form>
   );
 };
