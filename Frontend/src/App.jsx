@@ -14,8 +14,11 @@ import UserDashboard from "./pages/userDashboard";
 function App() {
   const { checkAuth, authUser } = UseAuthStore();
   useEffect(() => {
-    checkAuth();
+    checkAuth();  
   }, []);
+
+  console.log(authUser);
+  
 
   return (
     <div style={{ fontFamily: "Poppins, sans-serif" }}>

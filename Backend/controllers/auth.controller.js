@@ -175,8 +175,8 @@ export const checkAuth = async (req, res) => {
 
         req.userId = payLoad.userId;
 
-        const user = await userModel.findById(payLoad.userId);
-        return res.status(200).json({ success: true, result: { isAuthenticated: true, user: { _id: user._id, email: user.email } } });
+        const user = await userModel.findById(payLoad.userId).select("-password");
+        return res.status(200).json({ success: true, result: { isAuthenticated: true, user } });
 
     } catch (error) {
         console.log("Error in checkAuth \n", error);
