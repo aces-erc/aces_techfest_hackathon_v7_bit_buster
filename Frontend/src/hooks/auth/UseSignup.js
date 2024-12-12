@@ -27,10 +27,6 @@ const UseSignup = () => {
         if (!email || !password || !confirmPassword || !contact || !citizenShipNumber || !role || !bloodGroup || !gender)
             return console.log("please fill all the fields");
 
-        // console.log(firstName, lastName, email, contact, citizenShipNumber, role, bloodGroup, age, lastDonationDate, password, confirmPassword, gender, avatar, citizenship);
-
-        // console.log(avatar, citizenship)
-
         setIsLoading(true);
         try {
             // const formData = new FormData();
