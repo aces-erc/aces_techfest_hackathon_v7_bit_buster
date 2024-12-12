@@ -21,7 +21,7 @@ const Navbar = () => {
         <nav className="flex flex-col sm:flex-row gap-4">
           <Link
             to="/donors"
-            className={`min-w-fit justify-center self-center ${
+            className={`min-w-fit justify-center self-center  hover:font-semibold ${
               url === "/donors"
                 ? "underline underline-offset-8 font-semibold"
                 : ""
@@ -31,7 +31,7 @@ const Navbar = () => {
           </Link>
           <Link
             to="/request"
-            className={`min-w-fit justify-center self-center ${
+            className={`min-w-fit justify-center self-center hover:font-semibold ${
               url === "/request"
                 ? "underline underline-offset-8 font-semibold"
                 : ""
