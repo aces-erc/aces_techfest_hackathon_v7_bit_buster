@@ -8,19 +8,20 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="flex flex-wrap justify-between">
           <div className="w-full md:w-1/3 mb-6 md:mb-0">
-            <h3 className="text-xl font-bold mb-2">BloodConnect</h3>
+            <h3 className="text-xl font-bold mb-2">RedBond</h3>
             <p className="text-gray-600">
               Connecting donors with those in need.
+              Your Blood, Their Hope.
             </p>
           </div>
           <div className="w-full md:w-1/3 mb-6 md:mb-0">
             <h4 className="text-lg font-semibold mb-2">Quick Links</h4>
-            <ul className="space-y-2">
+            <ul className="flex flex-row items-center">
               <li>
                 <Button
                   variant="link"
                   href="/donors"
-                  className="text-gray-600 hover:text-white transition-colors duration-200"
+                  className="text-gray-600 hover:text-gray-700 transition-colors duration-200"
                 >
                   Find Donors
                 </Button>
@@ -29,7 +30,7 @@ const Footer = () => {
                 <Button
                   variant="link"
                   href="/request"
-                  className="text-gray-600 hover:text-white transition-colors duration-200"
+                  className="text-gray-600 hover:text-gray-700 transition-colors duration-200"
                 >
                   Request Blood
                 </Button>
@@ -38,17 +39,12 @@ const Footer = () => {
                 <Button
                   variant="link"
                   href="/register"
-                  className="text-gray-600 hover:text-white transition-colors duration-200"
+                  className="text-gray-600 hover:text-gray-700 transition-colors duration-200"
                 >
                   Become a Donor
                 </Button>
               </li>
             </ul>
-          </div>
-          <div className="w-full md:w-1/3">
-            <h4 className="text-lg font-semibold mb-2">Contact Us</h4>
-            <p className="text-gray-600">Email: info@bloodconnect.com</p>
-            <p className="text-gray-600">Phone: (123) 456-7890</p>
           </div>
         </div>
         <div className="mt-8 pt-8 border-t border-secondary text-center text-gray-600">
