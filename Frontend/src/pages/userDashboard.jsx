@@ -2,8 +2,13 @@ import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { MapPin, PhoneCallIcon } from "lucide-react";
+import { UseAuthStore } from "../zustand/AuthStore";
 
 const UserDashboard = () => {
+
+  const { authUser, checkAuth } = UseAuthStore();
+  console.log(authUser);
+  const {firstName, lastName, age, bloodGroup, contact, profilePicture} = authUser;
   return (
     <Card className="w-full max-w-7xl mx-auto my-2 shadow-lg">
       <CardContent className="p-4 md:p-6">
@@ -13,11 +18,11 @@ const UserDashboard = () => {
             <div className="relative mb-4">
               <Avatar className="w-48 h-48 md:w-64 md:h-64 border-4 border-blue-100">
                 <AvatarImage 
-                  src="/api/placeholder/400/400" 
+                  src={profilePicture} 
                   alt="User Profile"
                   className="object-cover"
                 />
-                <AvatarFallback className="text-2xl">GD</AvatarFallback>
+                <AvatarFallback className="text-2xl">{firstName[0]}{lastName[0]}</AvatarFallback>
               </Avatar>
               <div className="absolute bottom-0 right-0 bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center text-lg font-bold">
                 150
@@ -26,15 +31,15 @@ const UserDashboard = () => {
             
             <div className="text-center w-full">
               <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2">
-                Ghanashyam Dhungana
+                {firstName} {lastName}
               </h2>
               
               <div className="flex justify-center gap-2 mb-4">
                 <span className="bg-gray-200 text-gray-700 rounded-lg px-2 py-1 text-xs md:text-sm">
-                  Age
+                  {age}
                 </span>
                 <span className="bg-gray-200 text-gray-700 rounded-lg px-2 py-1 text-xs md:text-sm">
-                  B+ve
+                  {bloodGroup}
                 </span>
               </div>
               
@@ -45,7 +50,7 @@ const UserDashboard = () => {
                 </div>
                 <div className="flex items-center justify-center gap-2 text-gray-600">
                   <PhoneCallIcon className="w-5 h-5" />
-                  <span className="text-sm md:text-base">9876543210</span>
+                  <span className="text-sm md:text-base">{contact}</span>
                 </div>
               </div>
             </div>

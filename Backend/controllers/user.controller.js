@@ -2,7 +2,7 @@ import userModel from "../models/user.model.js";
 
 export const getActiveDonors = async (req, res) => {
     try {
-        const activeDonors = await userModel.find({ role: "user", isactive: true }).select("-password");
+        const activeDonors = await userModel.find({ role: "user" }).select("-password");
         res.status(200).json({ success: true, activeDonors });
     } catch (error) {
         console.log(error);
