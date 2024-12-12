@@ -1,35 +1,7 @@
 import { axiosInstance } from "@/lib/axios";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
-import {
-  getDownloadURL,
-  ref as storageRef,
-  uploadBytes,
-} from "firebase/storage";
-import { storage } from "../../firebase/firebaseconfig";
-import { uuidv4 } from "uuid";
-import { set } from "firebase/database";
-const uploadImage = async (image) => {
-  if (imageUpload === null) {
-    toastifyError("Please select an image");
-    return;
-  }
-  const imageRef = storageRef(storage, `products/${uuidv4()}`);
 
-  uploadBytes(imageRef, imageUpload)
-    .then((snapshot) => {
-      getDownloadURL(snapshot.ref)
-        .then((url) => {
-          return url;
-        })
-        .catch((error) => {
-          console.log(error.message);
-        });
-    })
-    .catch((error) => {
-      console.log(error.message);
-    });
-};
 
 const UseSignup = () => {
   const { toast } = useToast();

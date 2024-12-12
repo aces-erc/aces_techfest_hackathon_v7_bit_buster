@@ -16,6 +16,7 @@ const Navbar = () => {
     <div className="flex flex-col sm:flex-row w-full justify-between items-center">
       <div>
         <h1 className="font-bold text-4xl text-tert">RedBond</h1>
+        <img src="/images/logo.png" />
       </div>
       <div className="flex flex-row justify-bw-2/5 items-center">
         <nav className="flex flex-col sm:flex-row gap-4">
