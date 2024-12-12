@@ -36,10 +36,10 @@ const UserDashboard = () => {
               
               <div className="flex justify-center gap-2 mb-4">
                 <span className="bg-gray-200 text-gray-700 rounded-lg px-2 py-1 text-xs md:text-sm">
-                  {age}
+                  Age: {age}
                 </span>
                 <span className="bg-gray-200 text-gray-700 rounded-lg px-2 py-1 text-xs md:text-sm">
-                  {bloodGroup}
+                  {bloodGroup}ve
                 </span>
               </div>
               

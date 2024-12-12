@@ -11,6 +11,7 @@ export const getActiveDonors = async (req, res) => {
 }
 
 export const getDonorById = async (req, res) => {
+    console.log(req.params.id)
     try {
         const donor = await userModel.findById(req.params.id).select("-password");
         res.status(200).json({ success: true, donor });
