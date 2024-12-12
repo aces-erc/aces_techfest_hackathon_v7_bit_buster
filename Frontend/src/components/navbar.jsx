@@ -13,10 +13,9 @@ const Navbar = () => {
   }, [location]);
 
   return (
-    <div className="flex flex-col sm:flex-row w-full justify-between items-center">
+    <div className="flex flex-col sm:flex-row w-full justify-between items-center relative top-0">
       <div>
-        <h1 className="font-bold text-4xl text-tert">RedBond</h1>
-        <img src="/images/logo.png" />
+       <Link to="/home"><img src="/images/logo.png" className="w-auto h-20"/></Link> 
       </div>
       <div className="flex flex-row justify-bw-2/5 items-center">
         <nav className="flex flex-col sm:flex-row gap-4">
@@ -51,7 +50,7 @@ const Navbar = () => {
             Appointments
           </Link>
           <Link className="flex justify-center align-middle gap-2">
-            <ContextMenu />
+            <ContextMenu className="absolute z-10001" />
             <span className="self-center  sm:hidden">username</span>
           </Link>
         </nav>
