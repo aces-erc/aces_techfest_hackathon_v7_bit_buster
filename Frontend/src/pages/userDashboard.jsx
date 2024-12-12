@@ -6,7 +6,7 @@ import { UseAuthStore } from "../zustand/AuthStore";
 
 const UserDashboard = () => {
 
-  const { authUser } = UseAuthStore();
+  const { authUser,checkAuth } = UseAuthStore();
   console.log(authUser);
   const {firstName, lastName, age, bloodGroup, contact, profilePicture} = authUser;
   return (
