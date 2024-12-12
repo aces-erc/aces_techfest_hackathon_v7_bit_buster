@@ -12,6 +12,34 @@ import {
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import UseSignup from "../../hooks/auth/UseSignup";
 import { useNavigate } from "react-router-dom";
+import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
+
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
+
+// Fix for default marker icon in Leaflet
+import markerIcon from "leaflet/dist/images/marker-icon.png";
+import markerShadow from "leaflet/dist/images/marker-shadow.png";
+
+const DefaultIcon = L.icon({
+  iconUrl: markerIcon,
+  shadowUrl: markerShadow,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+});
+L.Marker.prototype.options.icon = DefaultIcon;
+
+// Define the LocationMarker Component
+const LocationMarker = ({ position, setPosition }) => {
+  useMapEvents({
+    click(e) {
+      const { lat, lng } = e.latlng;
+      setPosition({ lat, lng });
+    },
+  });
+
+  return position ? <Marker position={position} /> : null;
+};
 
 const RegistrationForm = () => {
   const avatarRef = useRef();
@@ -19,7 +47,7 @@ const RegistrationForm = () => {
 
   const [avatar, setAvatar] = useState(null);
   const [citizenship, setCitizenship] = useState(null);
-
+  const [position, setPosition] = useState(null);
   const [userData, setUserData] = useState({
     firstName: "",
     lastName: "",
@@ -41,7 +69,20 @@ const RegistrationForm = () => {
   const handleSignup = async (e) => {
     e.preventDefault();
 
-    const { firstName, lastName, email, contact, citizenShipNumber, role, bloodGroup, age, lastDonationDate, password, confirmPassword, gender } = userData;
+    const {
+      firstName,
+      lastName,
+      email,
+      contact,
+      citizenShipNumber,
+      role,
+      bloodGroup,
+      age,
+      lastDonationDate,
+      password,
+      confirmPassword,
+      gender,
+    } = userData;
     await signup({
       firstName,
       lastName,
@@ -56,9 +97,9 @@ const RegistrationForm = () => {
       confirmPassword,
       gender,
       avatar,
-      citizenship
+      citizenship,
     });
-  }
+  };
 
   return (
     <form className="space-y-4" onSubmit={handleSignup}>
@@ -125,7 +166,15 @@ const RegistrationForm = () => {
       </div>
       <div className="space-y-2">
         <Label htmlFor="contact">Contact Number</Label>
-        <Input onChange={(e) => setUserData({ ...userData, contact: e.target.value })} value={userData.contact} name="contact" type="number" required />
+        <Input
+          onChange={(e) =>
+            setUserData({ ...userData, contact: e.target.value })
+          }
+          value={userData.contact}
+          name="contact"
+          type="number"
+          required
+        />
       </div>
       <div className="space-y-2">
         <Label htmlFor="blood-group">Blood Group</Label>
@@ -161,7 +210,26 @@ const RegistrationForm = () => {
           required
         />
       </div>
-
+      <div className="gspace-y-2 group flex-col flex">
+        <label htmlFor="address">Address</label>
+        <span className="border-dotted border-2 border-indigo-600 my-auto text-center">
+          Pick your approximate address<br />
+          {position?.lat}, {position?.lng}
+        </span>
+        <div className="h-96 group-hover:block hidden">
+          <MapContainer
+            center={[26.7929645, 87.2897815]} // Default center
+            zoom={13}
+            style={{ height: "100%", width: "100%" }}
+          >
+            <TileLayer
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            />
+            <LocationMarker position={position} setPosition={setPosition} />
+          </MapContainer>
+        </div>
+      </div>
       <div className="gspace-y-2">
         <Label htmlFor="picture">Avatar</Label>
         <Input
