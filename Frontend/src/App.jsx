@@ -11,11 +11,12 @@ import Request from "./pages/request";
 import UserDashboard from "./pages/userDashboard";
 import LoginPage from "./components/auth/login";
 import SignupPage from "./components/auth/signup";
+import UserProfile from "./pages/userProfile";
 // import { db } from './firebase/firebaseconfig'
 function App() {
   const { checkAuth, authUser } = UseAuthStore();
   useEffect(() => {
-    checkAuth();  
+    checkAuth();
   }, []);
 
   console.log(authUser);
@@ -30,20 +31,27 @@ function App() {
           />
           <Route
             path="/donors"
-            element={authUser ? <Donors /> : <Navigate to="/" replace={true} />}
+            element={
+              authUser ? <Donors /> : <Navigate to="/donors" replace={true} />
+            }
           />
           <Route
             path="/request"
             element={
-              authUser ? <Request /> : <Navigate to="/" replace={true} />
+              authUser ? <Request /> : <Navigate to="/request" replace={true} />
             }
           />
           <Route
             path="/user/dashboard"
             element={
-              authUser ? <UserDashboard /> : <Navigate to="/" replace={true} />
+              authUser ? (
+                <UserDashboard />
+              ) : (
+                <Navigate to="/user/dashboard" replace={true} />
+              )
             }
           />
+          <Route path="/user/:id" element={<UserProfile />} />
         </Route>
         <Route
           path="/"
