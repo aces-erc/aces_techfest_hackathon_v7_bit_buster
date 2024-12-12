@@ -1,8 +1,10 @@
 import bcrypt from 'bcryptjs';
 // import uploadToCloudinary from '../lib/cloudinary/uploadToCloudinary.js';
+import fs from 'fs';
 import generateTokenAndSetCookie from '../lib/jwt/generateToken.js';
 import userModel from '../models/user.model.js';
 import jwt from 'jsonwebtoken'
+import cloudinary from '../lib/cloudinary/cloudinary.js';
 
 
 // signup logic
@@ -24,11 +26,16 @@ export const signup = async (req, res) => {
             gender
         } = req.body;
 
-        // console.log(req);
+        // console.log(req.body);
+        // console.log(req.files);
 
 
-        // const profileImageFile = req.files?.profileImageFile;
-        // const citizenshipImageFile = req.files?.citizenshipImageFile;
+
+        const profileImageFile = req.files['profileImageFile'][0];
+        const citizenshipImageFile = req.files['citizenshipImageFile'][0];
+
+        // console.log(typeof profileImageFile, typeof citizenshipImageFile);
+
 
         //check if confirm password match with password
         if (password !== confirmPassword)
@@ -54,26 +61,36 @@ export const signup = async (req, res) => {
             lastName,
             email,
             password: hashedPassword,
+            location: { latitude: "0", longitude: "0" },
             bloodGroup,
             age,
             citizenShipNumber,
             gender,
             contact,
             role,
-            lastDonationDate,
-            // profilePicture
+            lastDonationDate
         }
 
         //upload file to cloudonary and get its url
-        // if (profileImageFile) {
-        //     const profileImageUrl = await uploadToCloudinary(profileImageFile);
-        //     updateFields.profilePicture = profileImageUrl;
-        // }
+        if (profileImageFile) {
+            const filePath = req.files['profileImageFile'][0].path;
+            const result = await cloudinary.uploader.upload(filePath, {
+                folder: "uploads", // Optional: specify a folder
+            });
+            updateFields.profilePicture = result.secure_url;
+            fs.unlinkSync(filePath);
+        }
 
-        // if (citizenshipImageFile) {
-        //     const citizenshipImageUrl = await uploadToCloudinary(citizenshipImageFile);
-        //     updateFields.citizenshipPhoto = citizenshipImageUrl;
-        // }
+        if (citizenshipImageFile) {
+            const filePath = req.files['citizenshipImageFile'][0].path;
+            const result = await cloudinary.uploader.upload(filePath, {
+                folder: "uploads", // Optional: specify a folder
+            });
+            updateFields.citizenshipPhoto = result.secure_url;
+            fs.unlinkSync(filePath);
+            // updateFields.citizenshipPhoto = citizenshipImageUrl;
+            // const citizenshipImageUrl = await uploadToCloudinary(citizenshipImageFile);
+        }
 
         //create a new user from usermodel using above info
         const newUser = new userModel(updateFields)
@@ -159,7 +176,7 @@ export const checkAuth = async (req, res) => {
         req.userId = payLoad.userId;
 
         const user = await userModel.findById(payLoad.userId);
-        return res.status(200).json({ success: true, result: { isAuthenticated: true, user: {_id: user._id, email: user.email} } });
+        return res.status(200).json({ success: true, result: { isAuthenticated: true, user: { _id: user._id, email: user.email } } });
 
     } catch (error) {
         console.log("Error in checkAuth \n", error);

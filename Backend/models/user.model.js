@@ -16,8 +16,8 @@ const userSchema = new mongoose.Schema({
     lastDonationDate: { type: Date, required: true, default: null },
     verificationStatus: { type: Boolean, default: false },
     isActive: { type: Boolean, default: false },
-    // profilePicture: { type: String, required: true },
-    // citizenshipPhoto: { type: String, required: true },
+    profilePicture: { type: String, required: true },
+    citizenshipPhoto: { type: String, required: true },
 
     donationHistory: [{ type: mongoose.Schema.Types.ObjectId, ref: "donationModel" }]
 });
