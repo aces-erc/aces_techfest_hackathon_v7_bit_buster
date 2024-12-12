@@ -16,15 +16,18 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { axiosInstance } from "../../lib/axios";
 const ContextMenu = () => {
-  const handleLogout = async ()=>{
-    try {
-      await axiosInstance.get("/auth/logout");
+  const handleLogout = async (e) => {
+    e.preventDefault();
+   try{
+    axiosInstance.post("/auth/logout").then((res) => {
+      console.log(res);
       window.location.href = "/";
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
+    });
+   }
+   catch(err){
+    console.log(err.message)
+   }
+  };
 
   return (
     <DropdownMenu>
