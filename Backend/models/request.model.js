@@ -6,8 +6,10 @@ const requestSchema = new mongoose.Schema({
     urgencyLevel: { type: String, required: true, enum: ["Immediate", "24 Hours", "3 Days"] },
     hospitalId: { type: mongoose.Schema.Types.ObjectId, referece: "hospitalModel", required: true },
     locationId: { type: mongoose.Schema.Types.ObjectId, ref: "locationModel", required: true },
-    status: { type: String, required: true, enum: ['active', "fulfilled", "cancelled"], default:"active" }
+    status: { type: String, required: true, enum: ['active', "fulfilled", "cancelled"], default: "active" }
 }, { timestamps: true });
+
+requestSchema.index({ location: '2dsphere' });
 
 const requestModel = mongoose.models.requestModel || mongoose.model("requestModel", requestSchema);
 
