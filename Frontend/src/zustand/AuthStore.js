@@ -19,7 +19,6 @@ export const UseAuthStore = create((set, get) => ({
                 // })
                 return
             }
-            console.log(response.data);
 
             if (!response.data.success) {
                 // toast({
@@ -30,7 +29,6 @@ export const UseAuthStore = create((set, get) => ({
                 return
             }
 
-            console.log(response.data.user);
 
 
             set({ authUser: response.data.result.user })
