@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/select";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import UseSignup from "../../hooks/auth/UseSignup";
+import { useNavigate } from "react-router-dom";
 
 const RegistrationForm = () => {
   // const avatarRef = useRef();
@@ -35,6 +36,7 @@ const RegistrationForm = () => {
   })
 
   const { signup, isLoading } = UseSignup();
+  const navigate = useNavigate();
 
   const handleSignup = async (e) => {
     e.preventDefault();

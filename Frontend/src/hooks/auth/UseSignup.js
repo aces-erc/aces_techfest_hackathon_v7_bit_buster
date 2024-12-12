@@ -36,25 +36,21 @@ const UseSignup = () => {
     )
       return console.log("please fill all the fields");
 
-    // console.log(firstName, lastName, email, contact, citizenShipNumber, role, bloodGroup, age, lastDonationDate, password, confirmPassword, gender, avatar, citizenship);
-
-    // console.log(avatar, citizenship)
-
-    setIsLoading(true);
-    try {
-      // const formData = new FormData();
-      // formData.append("firstName", "prabin");
-      // formData.append("lastName", "Acharya");
-      // formData.append("email", email);
-      // formData.append("password", password);
-      // formData.append("confirmPassword", confirmPassword);
-      // formData.append("contact", contact);
-      // formData.append("citizenShipNumber", citizenShipNumber);
-      // formData.append("role", role);
-      // formData.append("bloodGroup", bloodGroup);
-      // formData.append("age", 23);
-      // formData.append("lastDonationDate", Date.now());
-      // formData.append("gender", gender);
+        setIsLoading(true);
+        try {
+            // const formData = new FormData();
+            // formData.append("firstName", "prabin");
+            // formData.append("lastName", "Acharya");
+            // formData.append("email", email);
+            // formData.append("password", password);
+            // formData.append("confirmPassword", confirmPassword);
+            // formData.append("contact", contact);
+            // formData.append("citizenShipNumber", citizenShipNumber);
+            // formData.append("role", role);
+            // formData.append("bloodGroup", bloodGroup);
+            // formData.append("age", 23);
+            // formData.append("lastDonationDate", Date.now());
+            // formData.append("gender", gender);
 
       // if (avatar) {
       //     formData.append("profileImageFile", avatar);
