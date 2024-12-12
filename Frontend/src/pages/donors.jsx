@@ -45,6 +45,7 @@ const Donors = () => {
   useEffect(() => {
     const fetchDonors = async () => {
       const donorsData = await getDonorsData();
+      
       setDonors(donorsData);
     };
     fetchDonors();
@@ -108,7 +109,7 @@ const Donors = () => {
                 <TableCell className="text-left">{`${donor.firstName} ${donor.lastName}`}</TableCell>
                 <TableCell className="text-center">{donor.bloodGroup}</TableCell>
                 <TableCell className="text-center">{donor.city || "N/A"}</TableCell>
-                <TableCell className="text-right">{donor.contact}</TableCell>
+                <TableCell className="text-right">{donor.email}</TableCell>
               </TableRow>
             ))}
           </TableBody>
