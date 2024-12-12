@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
+import { Link } from "react-router-dom";
 
 const Map = ({donorsData, receptorsData}) => {
   const [currentLocation, setCurrentLocation] = useState([
@@ -69,9 +70,11 @@ const Map = ({donorsData, receptorsData}) => {
             position={[donor?.location?.latitude, donor?.location?.longitude]}
             icon={donorMarkerIcon}
           >
-            <Popup>{donor.firstName}<br/>
-                <button>Contact</button>
+           <Link to={`/user/${donor._id}`}> <Popup>
+              <span className="text-lg font-semibold m-2">{donor.firstName}</span>
+                <span className="p-1 bg-orange-300 rounded-md">{donor.bloodGroup}</span>
             </Popup>
+            </Link>
           </Marker>
           )
 })}
@@ -82,9 +85,12 @@ const Map = ({donorsData, receptorsData}) => {
             position={[receptors?.locat?.lat, receptors?.locat?.long]}
             icon={receptorMarkerIcon}
           >
-            <Popup>{receptors.firstName}<br/>
-                <button>Contact</button>
+            <Link to={`/user/${receptors.requestUserId}`}>
+            <Popup>
+              <span className="text-lg">{receptors.urgencyLevel}</span>
+                <span className="p-1 rounded-md bg-red-200 px-2 m-2">{receptors.bloodGroup}</span>
             </Popup>
+            </Link>
           </Marker>
           )
 })}
