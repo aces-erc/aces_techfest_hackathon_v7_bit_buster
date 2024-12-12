@@ -31,7 +31,7 @@ const Navbar = () => {
           </Link>
           <Link
             to="/request"
-            className={`min-w-fit justify-center self-center${
+            className={`min-w-fit justify-center self-center ${
               url === "/request"
                 ? "underline underline-offset-8 font-semibold"
                 : ""
@@ -41,7 +41,7 @@ const Navbar = () => {
           </Link>
           <Link
             to="/appointment"
-            className={`min-w-fit justify-center self-center${
+            className={`min-w-fit justify-center self-center ${
               url === "/appointment"
                 ? "underline underline-offset-8 font-semibold"
                 : ""
