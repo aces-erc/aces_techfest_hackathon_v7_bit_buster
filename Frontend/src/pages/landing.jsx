@@ -8,6 +8,8 @@ import { Navigate } from 'react-router-dom'
 
 const Landing = () => {
   const { authUser } = UseAuthStore();
+  console.log(authUser);
+  
   return (
     <>
       {authUser && (<Navigate to="/home" replace="true" />)}

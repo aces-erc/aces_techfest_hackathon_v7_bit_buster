@@ -12,7 +12,7 @@ function App() {
 
   useEffect(() => {
     checkAuth();
-  }, [authUser])
+  }, [])
 
   return (
     <div style={{ fontFamily: "Poppins, sans-serif" }}>

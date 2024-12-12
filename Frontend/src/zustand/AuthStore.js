@@ -1,5 +1,5 @@
-import { axiosInstance } from '@/lib/axios';
 import { create } from 'zustand';
+import { axiosInstance } from '../lib/axios';
 
 
 export const UseAuthStore = create((set, get) => ({
@@ -7,18 +7,25 @@ export const UseAuthStore = create((set, get) => ({
 
     checkAuth: async () => {
         try {
+            
             const response = await axiosInstance.get("/auth/checkAuth");
             if (!response) {
                 // toast.error("Bad Request");
                 return
             }
+            console.log(response.data);
 
             if (!response.data.success) {
                 // toast.error(response.data.message);
                 return
             }
 
-            set({ authUser: response.data.user })
+            console.log(response.data.user);
+            
+
+            set({ authUser: response.data.result.user })
+            // console.log(get().authUser);
+            
 
         } catch (error) {
             // toast.error(error.response.data.message);
