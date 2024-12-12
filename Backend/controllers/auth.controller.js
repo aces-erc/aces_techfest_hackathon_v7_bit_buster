@@ -24,7 +24,8 @@ export const signup = async (req, res) => {
             password,
             confirmPassword,
             gender,
-            position
+            latitude,
+            longitude
         } = req.body;
 
         // console.log(req.body);
@@ -56,7 +57,6 @@ export const signup = async (req, res) => {
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
 
-        const locationTemp = JSON.parse(position);
 
         //fields to be used while creating user
         let updateFields = {
@@ -64,7 +64,6 @@ export const signup = async (req, res) => {
             lastName,
             email,
             password: hashedPassword,
-            location: { latitude: locationTemp.lat, longitude: locationTemp.lng },
             bloodGroup,
             age,
             citizenShipNumber,
@@ -72,6 +71,7 @@ export const signup = async (req, res) => {
             contact,
             role,
             lastDonationDate,
+            location: {latitude, longitude}
             // location: JSON.parse(position)
         }
 

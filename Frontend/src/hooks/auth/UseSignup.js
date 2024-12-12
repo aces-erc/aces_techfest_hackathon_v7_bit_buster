@@ -61,7 +61,8 @@ const UseSignup = () => {
             formData.append("age", age);
             formData.append("lastDonationDate", Date.now());
             formData.append("gender", gender);
-            formData.append("gender", JSON.stringify(position));
+            formData.append("latitude", position.lat);
+            formData.append("longitude", position.lng);
 
             formData.append("profileImageFile", avatar);
             formData.append("citizenshipImageFile", citizenship);
