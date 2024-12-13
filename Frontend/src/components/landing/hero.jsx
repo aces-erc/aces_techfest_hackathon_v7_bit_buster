@@ -41,10 +41,8 @@ const HeroSection = () => {
 
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-            <Button variant="destructive" className="w-full sm:w-auto">
-              Donate Now
-            </Button>
-            <DialogDemo className="w-full sm:w-auto" />
+            <DialogDemo className="w-full sm:w-auto" login={true}/>
+            <DialogDemo className="w-full sm:w-auto" login={false} />
           </div>
         </div>
 

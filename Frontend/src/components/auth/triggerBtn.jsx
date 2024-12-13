@@ -15,7 +15,7 @@ export default function DialogDemo({ login, styles }) {
   return (
     <Dialog >
       <DialogTrigger >
-        <Button className={styles} variant="outline">{isLogin ? "Login" : "Signup"}</Button>
+        <Button className={styles} variant={isLogin?"destructive":"outline"}>{isLogin ? "Login" : "Signup"}</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px] overflow-y-auto h-screen">
         <DialogHeader>
