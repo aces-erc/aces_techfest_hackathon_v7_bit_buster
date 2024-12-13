@@ -10,6 +10,7 @@ import Donors from "./pages/donors";
 import Request from "./pages/request";
 import Appointment from "./pages/appointment";
 import UserDashboard from "./pages/userDashboard";
+import LoginPage from "./components/auth/login";
 // import { db } from './firebase/firebaseconfig'
 function App() {
   const { checkAuth, authUser } = UseAuthStore();
@@ -55,6 +56,18 @@ function App() {
           path="/"
           element={
             authUser ? <Navigate to="/home" replace={true} /> : <Landing />
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            authUser ? <Navigate to="/home" replace={true} /> : <LoginPage />
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+            authUser ? <Navigate to="/signup" replace={true} /> : <SignupPage />
           }
         />
       </Routes>
