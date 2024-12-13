@@ -11,6 +11,7 @@ import Request from "./pages/request";
 import Appointment from "./pages/appointment";
 import UserDashboard from "./pages/userDashboard";
 import LoginPage from "./components/auth/login";
+import SignupPage from "./components/auth/signup";
 // import { db } from './firebase/firebaseconfig'
 function App() {
   const { checkAuth, authUser } = UseAuthStore();
@@ -19,7 +20,6 @@ function App() {
   }, []);
 
   console.log(authUser);
-  
 
   return (
     <div style={{ fontFamily: "Poppins, sans-serif" }}>
@@ -67,7 +67,7 @@ function App() {
         <Route
           path="/signup"
           element={
-            authUser ? <Navigate to="/signup" replace={true} /> : <SignupPage />
+            authUser ? <Navigate to="/login" replace={true} /> : <SignupPage />
           }
         />
       </Routes>

@@ -1,6 +1,5 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
-import DialogDemo from "../auth/triggerBtn";
 import { Heart, Droplet, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -42,16 +41,20 @@ const HeroSection = () => {
 
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-            {/* <DialogDemo className="w-full sm:w-auto" login={true}/>
-            <DialogDemo className="w-full sm:w-auto" login={false} /> */}
             <Link to="/login">
-              <Button variant="destructive" size="lg" className="w-full sm:w-auto">
+              <Button
+                variant="destructive"
+                size="lg"
+                className="w-full sm:w-auto"
+              >
                 login
               </Button>
             </Link>
-            <Button variant="outline" size="lg" className="w-full sm:w-auto">
-              signup
-            </Button>
+            <Link to="/signup">
+              <Button variant="outline" size="lg" className="w-full sm:w-auto">
+                signup
+              </Button>
+            </Link>
           </div>
         </div>
 
