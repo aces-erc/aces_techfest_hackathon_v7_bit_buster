@@ -8,7 +8,6 @@ import { Toaster } from "@/components/ui/toaster";
 import Layout from "./pages/layout";
 import Donors from "./pages/donors";
 import Request from "./pages/request";
-import Appointment from "./pages/appointment";
 import UserDashboard from "./pages/userDashboard";
 import LoginPage from "./components/auth/login";
 import SignupPage from "./components/auth/signup";
@@ -37,12 +36,6 @@ function App() {
             path="/request"
             element={
               authUser ? <Request /> : <Navigate to="/" replace={true} />
-            }
-          />
-          <Route
-            path="/appointment"
-            element={
-              authUser ? <Appointment /> : <Navigate to="/" replace={true} />
             }
           />
           <Route

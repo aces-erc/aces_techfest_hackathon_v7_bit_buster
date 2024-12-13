@@ -39,16 +39,7 @@ const Navbar = () => {
           >
             Request Blood
           </Link>
-          <Link
-            to="/appointment"
-            className={`min-w-fit justify-center self-center ${
-              url === "/appointment"
-                ? "underline underline-offset-8 font-semibold"
-                : ""
-            }`}
-          >
-            Appointments
-          </Link>
+          
           <Link className="flex justify-center align-middle gap-2">
             <ContextMenu className="absolute z-10001" />
             <span className="self-center  sm:hidden">username</span>
